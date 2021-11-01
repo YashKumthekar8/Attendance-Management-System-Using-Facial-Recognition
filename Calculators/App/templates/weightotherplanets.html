@@ -1,0 +1,347 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>weight on other planets Calculator | Free Calculator to find weight on other planets</title>
+<meta name="description"
+    content="weight on other planets Calculator makes it easy for you to find weight on other planets." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content="weight on other planets Calculator | Free Calculator to find weight on other planets" />
+<meta property="og:description" content="weight on other planets Calculator" />
+<meta content="" property="og:site_name" />
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/weight-other-planets.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="weight on other planets Calculator | Free Calculator to find weight on other planets" />
+<meta name="twitter:description"
+    content="weight on other planets Calculator makes it easy for you to find weight on other planets." />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/weight-other-planets.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<meta property='og:title' content="weight on other planets Calculatorr | weight on other planets" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/weight-other-planets.jpeg" />
+<meta property='og:description' content="weight on other planets Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock%}
+
+{%block content%}
+
+<style>
+    input {
+        text-align: right;
+    }
+</style>
+
+{%if go_to %}
+<a href="{{go_to}}" id="ddd"></a>
+{%endif%}
+
+<script>
+	  document.addEventListener('DOMContentLoaded', function () {
+		document.getElementById('ddd').click();
+		});
+</script>
+
+
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Weight on Other Planet Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+
+            <form action="" method="POST" id="my_form" >
+                {% csrf_token %}
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Choose a Calculation Method</strong></div>
+                        </div>
+                        <select name="given_data" id="inlineFormInputGroup" class="form-control"
+                            onchange="this.form.submit();" autofocus="">
+
+                            {% if given_data == 'form1' %}
+                            <option value="form1" selected="selected"> Find Mass on other Planets | Given Mass on earth </option>
+                            {% else %}
+                            <option value="form1">Find Mass on other Planets | Given Mass on earth</option>
+                            {% endif %}
+
+                            {% if given_data == 'form2' %}
+                            <option value="form2" selected="selected">Find Mass on other Planets | Given Mass on Mercury</option>
+                            {% else %}
+                            <option value="form2">Find Mass on other Planets | Given Mass on Mercury</option>
+                            {% endif %}
+
+                           {% if given_data == 'form3' %}
+                            <option value="form3" selected="selected">Find Mass on other Planets | Given Mass on venus</option>
+                            {% else %}
+                            <option value="form3">Find Mass on other Planets | Given Mass on venus</option>
+                            {% endif %}
+
+                            {% if given_data == 'form4' %}
+                            <option value="form4" selected="selected">Find Mass on other Planets | Given Mass on Mars</option>
+                            {% else %}
+                            <option value="form4">Find Mass on other Planets | Given Mass on Mars</option>
+                            {% endif %}
+
+                            {% if given_data == 'form5' %}
+                            <option value="form5" selected="selected">Find Mass on other Planets | Given Mass on Jupiter</option>
+                            {% else %}
+                            <option value="form5">Find Mass on other Planets | Given Mass on Jupiter</option>
+                            {% endif %}
+
+                            {% if given_data == 'form6' %}
+                            <option value="form6" selected="selected">Find Mass on other Planets | Given Mass on saturn</option>
+                            {% else %}
+                            <option value="form6">Find Mass on other Planets | Given Mass on saturn</option>
+                            {% endif %}
+
+                            {% if given_data == 'form7' %}
+                            <option value="form7" selected="selected">Find Mass on other Planets | Given Mass on Uranus</option>
+                            {% else %}
+                            <option value="form7">Find Mass on other Planets | Given Mass on Uranus</option>
+                            {% endif %}
+
+                            {% if given_data == 'form8' %}
+                            <option value="form8" selected="selected">Find Mass on other Planets | Given Mass on Neptun</option>
+                            {% else %}
+                            <option value="form8">Find Mass on other Planets | Given Mass on Neptun</option>
+                            {% endif %}
+
+                            {% if given_data == 'form9' %}
+                            <option value="form9" selected="selected">Find Mass on other Planets | Given Mass on Pluto</option>
+                            {% else %}
+                            <option value="form9">Find Mass on other Planets | Given Mass on Pluto</option>
+                            {% endif %}
+
+                            {% if given_data == 'form10' %}
+                            <option value="form10" selected="selected">Find Mass on other Planets | Given Mass on Moon</option>
+                            {% else %}
+                            <option value="form10">Find Mass on other Planets | Given Mass on Moon</option>
+                            {% endif %}
+
+                        </select>
+                    </div>
+
+
+                    
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>weigth on {{name}}</strong></div>
+                        </div>
+                        <input type="number" min="0" step="0.0001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ia"  value="{{Ia1}}">
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ia_op">
+                            
+                            {% if Ia_op == 'kg' %}
+                            <option value="kg" selected="selected">kilograms(kg)</option>
+                            {% else %}
+                            <option value="kg">kilograms(Kg)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'g' %}
+                            <option value="g" selected="selected">grams(g)</option>
+                            {% else %}
+                            <option value="g">grams(g)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'mg' %}
+                            <option value="mg" selected="selected">milligram(mg)</option>
+                            {% else %}
+                            <option value="mg">milligram(mg)</option>
+                            {% endif %}
+                            
+                            
+                            {% if Ia_op == 'dg' %}
+                            <option value="dg" selected="selected">decagrams(dg)</option>
+                            {% else %}
+                            <option value="dg">decagrams(dg)</option>
+                            {% endif %}
+
+                            
+                            {% if Ia_op == 't' %}
+                            <option value="t" selected="selected">Metric ton(t)</option>
+                            {% else %}
+                            <option value="t">Metric ton(t)</option>
+                            {% endif %}
+
+                            
+                            {% if Ia_op == 'oz' %}
+                            <option value="oz" selected="selected">ounces(oz)</option>
+                            {% else %}
+                            <option value="oz">ounces(oz)</option>
+                            {% endif %}
+
+                            
+                            {% if Ia_op == 'lb' %}
+                            <option value="lb" selected="selected">pounds(lb)</option>
+                            {% else %}
+                            <option value="lb">pounds(lb)</option>
+                            {% endif %}
+                            
+                        </select>
+                    </div>
+                    
+
+                    <div class=" center col mt-2 ">
+                        <center><button type="submit" class="btn btn-primary" name="f1">Calculate</button>
+                            <button type="button" onclick="myFunction()" style="margin-top:5px;"
+                                class="btn btn-danger">Reset</button>
+                        </center>
+                    </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div id="clear">
+
+    {% if given_data  and id == 1  %}
+    <div class="card" id="magnetic-force">
+        <div class="card-header">
+            <h2 class="h2">Steps to weigth on another Planets</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Input values are:-</strong>
+            <p>weigth on {{name}} = {{Ia1}} {{Ia_op}} </p>
+            
+           
+            {% if Ia_op != 'kg' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Mass  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"kg"</i></b></b>
+                </summary>
+                <p>Converting mass = {{Ia1}} {{Ia_c|safe}} </p>
+                <p>Mass  ={{Ia}} kg</p>
+                
+            </details>
+            {% endif %}
+            
+            <br>
+           {% if name != "Earth" %}
+            <div class="border border-dark">
+               <p>Weight on the earth = Weigth on {{name}}/{{fact}} </p>
+               <p>Weight on the earth = {{Ia}}/{{fact}} </p>
+               <b>Weight on earth ={{Iw}} Kg </b> 
+
+            </div>
+
+            <br>
+            {% endif %}
+            <br>
+
+            {% for i,j,k in list  %}
+              {% if i != name and i != "Earth" %}
+              <div class="border border-dark mb-3"> 
+                 <p> Weigth on {{i}} = {{j}} X Weight on Earth  </p>
+                 <p><b> weigth on {{i}} = {{k}} Kg  </b></p>
+              </div>
+              {%endif%}
+            {%endfor%}
+            
+
+            
+
+           
+        </div>
+
+    </div>
+    {% endif %}
+
+    
+
+</div>
+
+
+
+<script>
+    
+{% if id == 1 %}
+ 
+var scrollDiv = document.getElementById("clear").offsetTop;
+window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+
+{%endif%}
+
+  
+
+
+    var validNumber = new RegExp(/^\d*\.?-?\d*$/);
+    var fist_input = document.getElementById("inlineFormInputGroup").value;
+    function validateNumber(elem) {
+        console.log(elem)
+        if (validNumber.test(elem.value)) {
+            fist_input = elem.value;
+        } else {
+            elem.value = fist_input;
+        }
+    }
+</script>
+
+<script>
+    function myFunction() {
+
+            document.getElementsByName("Ia")[0].value = "";
+            document.getElementsByName("Ia_op")[0].value = "kg";
+            document.getElementById("clear").innerHTML = "";
+
+    }
+</script>
+<br>
+
+
+{% endblock %}

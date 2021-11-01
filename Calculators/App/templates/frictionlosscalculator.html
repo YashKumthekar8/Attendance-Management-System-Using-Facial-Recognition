@@ -1,0 +1,883 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>    Friction Loss Calculator | Free Calculator to find  Friction Loss </title>
+<meta name="description"
+    content="    Friction Loss Calculator makes it easy for you to find   Friction Loss ." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content=" Friction Loss Calculator | Free Calculator to find     Friction Loss" />
+<meta property="og:description" content="    Friction Loss Calculator" />
+<meta content="" property="og:site_name" />
+    
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="    Friction Loss Calculator | Free Calculator to find     Friction Loss" />
+<meta name="twitter:description"
+    content="Ohm's law Calculator" />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<tittle> Friction Loss Calculator</tittle>
+<meta property='og:title' content="    Friction Loss Calculator |     Friction Loss" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
+<meta property='og:description' content="Ohm's law Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock%}
+
+{%block content%}
+
+<style>
+    input {
+        text-align: right;
+    }
+</style>
+
+
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Friction Loss Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+
+            <form action="" method="POST" id="my_form" >
+                {% csrf_token %}
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Choose a Calculation</strong></div>
+                        </div>
+                        <select name="given_data" id="inlineFormInputGroup" class="form-control"
+                            onchange="this.form.submit();" autofocus="">
+
+                            {% if given_data == 'form1' %}
+                            <option value="form1" selected="selected"> Find Friction Head Loss | Given Pipe Inside Diameter, Pipe Material ,Flow rate and  Pipe Length  </option>
+                            {% else %}
+                            <option value="form1"> Find Friction Head Loss | Given Pipe Inside Diameter,Pipe Material,Flow rate and  Pipe Length </option>
+                            {% endif %}
+
+                            {% if given_data == 'form2' %}
+                            <option value="form2" selected="selected"> Find Pipe Inside Diameter | Given Friction Head Loss, Pipe Material ,Flow rateand Pipe Length  </option>
+                            {% else %}
+                            <option value="form2">Find Pipe Inside Diameter | Given Friction Head Loss,Pipe Material,Flow rate and Pipe Length </option>
+                            {% endif %}
+
+                            {% if given_data == 'form3' %}
+                            <option value="form3" selected="selected"> Find Pipe Length| Given Friction Head Loss ,Pipe Material ,Flow rate and Pipe Inside Diameter
+                            </option>
+                            {% else %}
+                            <option value="form3"> Find Pipe Length| Given Friction Head Loss, Pipe Material ,Flow rate and Pipe Inside Diameter  </option>
+                            {% endif %}
+
+                            {% if given_data == 'form4' %}
+                            <option value="form4" selected="selected"> Find Flow rate| Given Friction Head Loss ,Pipe Material ,Pipe Length and Pipe Inside Diameter
+                            </option>
+                            {% else %}
+                            <option value="form4"> Find Flow rate| Given Friction Head Loss, Pipe Material ,Pipe Length and Pipe Inside Diameter  </option>
+                            {% endif %}
+
+
+
+                        </select>
+                    </div>
+
+
+
+                    {% if given_data != "form3" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Pipe Length</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001"  oninput="validateNumber(this);" id="Ib" required=""
+                            placeholder="Enter number"  class="form-control mt-1" name="Ib" {% if Ib %} value="{{Ib1}}" {% else %} value="6" {% endif %}>
+
+
+                        <select class="select form-control mt-1" id="Ib_op" name="Ib_op">
+
+                            {% if Ib_op == 'm' %}
+                            <option value="m" selected="selected">meter(m)</option>
+                            {% else %}
+                            <option value="m">meter(m)</option>
+                            {% endif %}
+
+                            {% if Ib_op == 'cm' %}
+                            <option value="cm" selected="selected">centimeter(cm)</option>
+                            {% else %}
+                            <option value="cm">centimeter(cm)</option>
+                            {% endif %}
+
+
+                            {% if Ib_op == 'mm' %}
+                            <option value="mm" selected="selected">milliMeter(mm)</option>
+                            {% else %}
+                            <option value="mm">milliMeter(mm)</option>
+                            {% endif %}
+
+                            
+                            {% if Ib_op == 'ft' %}
+                            <option value="ft" selected="selected">feet(ft)</option>
+                            {% else %}
+                            <option value="ft">feet(ft)</option>
+                            {% endif %}
+
+                            {% if Ib_op == 'in' %}
+                            <option value="in" selected="selected">inch(in)</option>
+                            {% else %}
+                            <option value="in">inch(in)</option>
+                            {% endif %}
+
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+
+                    {% if given_data != "form2" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Pipe Inside Diameter</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="Ia" required=""
+                            placeholder="Enter number"  class="form-control mt-1" name="Ia" {% if Ia1 %} value="{{Ia1}}" {% else %} value="10" {% endif %}>
+
+
+                        <select class="select form-control mt-1" id="Ia_op" name="Ia_op">
+
+
+                            {% if Ia_op == 'm' %}
+                            <option value="m" selected="selected">meter(m)</option>
+                            {% else %}
+                            <option value="m">meter(m)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'cm' %}
+                            <option value="cm" selected="selected">centimeter(cm)</option>
+                            {% else %}
+                            <option value="cm">centimeter(cm)</option>
+                            {% endif %}
+
+
+                            {% if Ia_op == 'mm' %}
+                            <option value="mm" selected="selected">milliMeter(mm)</option>
+                            {% else %}
+                            <option value="mm">milliMeter(mm)</option>
+                            {% endif %}
+
+                            
+                            {% if Ia_op == 'ft' %}
+                            <option value="ft" selected="selected">feet(ft)</option>
+                            {% else %}
+                            <option value="ft">feet(ft)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'in' %}
+                            <option value="in" selected="selected">inch(in)</option>
+                            {% else %}
+                            <option value="in">inch(in)</option>
+                            {% endif %}
+                             
+          
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+
+                    {% if given_data != "form1" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Friction Head Loss </strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="F" required=""
+                           placeholder="Enter number"  class="form-control mt-1" name="F" {% if F %} value="{{F1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control mt-1" id="F_op" name="F_op">
+                          
+                            {% if F_op == 'm' %}
+                            <option value="m" selected="selected">meter(m)</option>
+                            {% else %}
+                            <option value="m">meter(m)</option>
+                            {% endif %}
+
+                            {% if F_op == 'cm' %}
+                            <option value="cm" selected="selected">centimeter(cm)</option>
+                            {% else %}
+                            <option value="cm">centimeter(cm)</option>
+                            {% endif %}
+
+
+                            {% if F_op == 'mm' %}
+                            <option value="mm" selected="selected">milliMeter(mm)</option>
+                            {% else %}
+                            <option value="mm">milliMeter(mm)</option>
+                            {% endif %}
+
+                            
+                            {% if F_op == 'ft' %}
+                            <option value="ft" selected="selected">feet(ft)</option>
+                            {% else %}
+                            <option value="ft">feet(ft)</option>
+                            {% endif %}
+
+                            {% if F_op == 'in' %}
+                            <option value="in" selected="selected">inch(in)</option>
+                            {% else %}
+                            <option value="in">inch(in)</option>
+                            {% endif %}
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+                  {% if given_data != "form4" %}
+                  
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Flow rate </strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="flow" required=""
+                           placeholder="Enter number"  class="form-control mt-1" name="flow" {% if flow %} value="{{flow1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control mt-1" id="flow_op" name="flow_op">
+                            
+                            {% if flow_op == 'm/s' %}
+                            <option value="m/s" selected="selected">Cubic meter per second</option>
+                            {% else %}
+                            <option value="m/s">Cubic meter per second</option>
+                            {% endif %}
+
+
+                            {% if flow_op == 'l/s' %}
+                            <option value="l/s" selected="selected">litre/second</option>
+                            {% else %}
+                            <option value="l/s">litre/second</option>
+                            {% endif %}
+
+
+                            {% if flow_op == 'cm/s' %}
+                            <option value="cm/s" selected="selected">centimeter cube per second</option>
+                            {% else %}
+                            <option value="cm/s">centimeter cube per second</option>
+                            {% endif %}
+
+                            
+                            {% if flow_op == 'm/min' %}
+                            <option value="m/min" selected="selected">Cubic meter per minute</option>
+                            {% else %}
+                            <option value="m/min">Cubic meter per minute</option>
+                            {% endif %}
+
+
+                            {% if flow_op == 'l/min' %}
+                            <option value="l/min" selected="selected">litre/minute</option>
+                            {% else %}
+                            <option value="l/min">litre/minute</option>
+                            {% endif %}
+
+
+                            {% if flow_op == 'cm/min' %}
+                            <option value="cm/min" selected="selected">centimeter cube per minute</option>
+                            {% else %}
+                            <option value="cm/min">centimeter cube per minute</option>
+                            {% endif %}
+
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Pipe Material </strong></div>
+                        </div>
+
+                        <select class="select form-control mt-1" id="mat_op" name="mat_op">
+                          
+                            {% if mat_op == 'ABS ' %}
+                            <option value="ABS" selected="selected">ABS </option>
+                            {% else %}
+                            <option value="ABS">ABS </option>
+                            {% endif %}
+
+                            {% if mat_op == 'Aluminum' %}
+                            <option value="Aluminum" selected="selected">Aluminum</option>
+                            {% else %}
+                            <option value="Aluminum">Aluminum</option>
+                            {% endif %}
+
+                            {% if mat_op == 'Asbestos Cement' %}
+                                <option value="Asbestos Cement" selected="selected">Asbestos Cement</option>
+                                {% else %}
+                                <option value="Asbestos Cement">Asbestos Cement</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Asphalt Lining' %}
+                                <option value="Asphalt Lining" selected="selected">Asphalt Lining</option>
+                                {% else %}
+                                <option value="Asphalt Lining">Asphalt Lining</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Brass' %}
+                                <option value="Brass" selected="selected">Brass</option>
+                                {% else %}
+                                <option value="Brass">Brass</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Brick sewer' %}
+                                <option value="Brick sewer" selected="selected">Brick sewer</option>
+                                {% else %}
+                                <option value="Brick sewer">Brick sewer</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Cast-Iron - new unlined (CIP)' %}
+                                <option value="Cast-Iron - new unlined (CIP)" selected="selected">Cast-Iron - new unlined (CIP)</option>
+                                {% else %}
+                                <option value="Cast-Iron - new unlined (CIP)">Cast-Iron - new unlined (CIP)</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Cement lining' %}
+                                <option value="Cement lining" selected="selected">Cement lining</option>
+                                {% else %}
+                                <option value="Cement lining">Cement lining</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Concrete' %}
+                                <option value="Concrete" selected="selected">Concrete</option>
+                                {% else %}
+                                <option value="Concrete">Concrete</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Concrete lined, steel forms' %}
+                                <option value="Concrete lined, steel forms" selected="selected">Concrete lined, steel forms</option>
+                                {% else %}
+                                <option value="Concrete lined, steel forms">Concrete lined, steel forms</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Concrete lined, wooden forms' %}
+                                <option value="Concrete lined, wooden forms" selected="selected">Concrete lined, wooden forms</option>
+                                {% else %}
+                                <option value="Concrete lined, wooden forms">Concrete lined, wooden forms</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Copper' %}
+                                <option value="Copper" selected="selected">Copper</option>
+                                {% else %}
+                                <option value="Copper">Copper</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Corrugated Metal' %}
+                                <option value="Corrugated Metal" selected="selected">Corrugated Metal</option>
+                                {% else %}
+                                <option value="Corrugated Metal">Corrugated Metal</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Ductile Iron Pipe (DIP)' %}
+                                <option value="Ductile Iron Pipe (DIP)" selected="selected">Ductile Iron Pipe (DIP)</option>
+                                {% else %}
+                                <option value="Ductile Iron Pipe (DIP)">Ductile Iron Pipe (DIP)</option>
+                            {% endif %}
+
+                            {% if mat_op == 'Fiber' %}
+                                <option value="Fiber" selected="selected">Fiber</option>
+                                {% else %}
+                                <option value="Fiber">Fiber</option>
+                            {% endif %}
+
+                            {% if mat_op == 'Fiber Glass Pipe - FRP' %}
+                                <option value="Fiber Glass Pipe - FRP" selected="selected">Fiber Glass Pipe - FRP</option>
+                                {% else %}
+                                <option value="Fiber Glass Pipe - FRP">Fiber Glass Pipe - FRP</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Galvanized iron' %}
+                                <option value="Galvanized iron" selected="selected">Galvanized iron</option>
+                                {% else %}
+                                <option value="Galvanized iron">Galvanized iron</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Glass' %}
+                                <option value="Glass" selected="selected">Glass</option>
+                                {% else %}
+                                <option value="Glass">Glass</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Lead' %}
+                                <option value="Lead" selected="selected">Lead</option>
+                                {% else %}
+                                <option value="Lead">Lead</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Metal Pipes - Very to extremely smooth' %}
+                                <option value="Metal Pipes - Very to extremely smooth" selected="selected">Metal Pipes - Very to extremely smooth</option>
+                                {% else %}
+                                <option value="Metal Pipes - Very to extremely smooth">Metal Pipes - Very to extremely smooth</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Plastic' %}
+                                <option value="Plastic" selected="selected">Plastic</option>
+                                {% else %}
+                                <option value="Plastic">Plastic</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Polyvinyl chloride, PVC, CPVC' %}
+                                <option value="Polyvinyl chloride, PVC, CPVC" selected="selected">Polyvinyl chloride, PVC, CPVC</option>
+                                {% else %}
+                                <option value="Polyvinyl chloride, PVC, CPVC">Polyvinyl chloride, PVC, CPVC</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Tin' %}
+                                <option value="Tin" selected="selected">Tin</option>
+                                {% else %}
+                                <option value="Tin">Tin</option>
+                            {% endif %}
+
+                              {% if mat_op == 'Wood Stave' %}
+                                <option value="Wood Stave" selected="selected">Wood Stave</option>
+                                {% else %}
+                                <option value="Wood Stave">Wood Stave</option>
+                            {% endif %}
+
+                        </select>
+
+                    </div>
+
+                
+
+                    <div class=" center col mt-2 ">
+                        <center><button type="submit" class="btn btn-primary" name="f1">Calculate</button>
+                            <button type="button" onclick="myFunction()" style="margin-top:5px;"
+                                class="btn btn-danger">Reset</button>
+                        </center>
+                    </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div id="clear">
+
+    {% if given_data == "form1" and F %}
+    <div class="card" id="magnetic-Pipe Inside Diameter">
+        <div class="card-header">
+            <h2 class="h2">Steps to Calculate Friction Head Loss</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Friction Head Loss Formula-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">hL = 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / d<sup>4.87</sup> </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li> hL represents friction head loss  </li>
+                        <li> L represents length of pipe</li>
+                        <li> d represents internal pipe diameter</li>
+                        <li> Q represents flow rate through the pipe </li>
+                        <li> C represents the Hazen-Williams coefficient, which will vary according to how smooth the internal surfaces of the pipe </li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Pipe Inside Diameter = {{Ia1}} {{Ia_op}} </p>
+            <p>Pipe Length = {{Ib1}} {{Ib_op}}</p>
+            <p>Flow rate = {{flow1}} {% if flow_op != 'l/s' and flow_op != 'l/min' %}{{A}}<sup>3</sup>{{B}}{%else%}{{flow_op}}{%endif%}</p>
+            <p>Hazen-Williams coefficient = {{c}} for  {{mat_op}} </p> 
+        
+        
+           
+            {% if Ia_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Pipe Inside Diameter  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Converting Pipe Inside Diameter  ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Pipe Inside Diameter ={{Ia|safe}} m </p>
+            </details>
+            {% endif %}
+
+            {% if Ib_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Converting the Pipe Length  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Pipe Length  ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Pipe Length ={{Ib|safe}} m </p>
+            </details>
+            {% endif %}
+
+            {% if flow_op != 'm/s' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Converting  the flow  {{flow1}}<b><i>" {% if flow_op != 'l/s' and flow_op != 'l/min' %}{{A}}<sup>3</sup>{{B}}{%else%}{{flow_op}}{%endif%} "</i></b> to
+                    <b><i>"cubic meter per second"</i></b></b>
+                </summary>
+                <p>Converting flow rate  ={{flow1}} {{flow_c|safe}}</p>
+                <p>Flow rate ={{flow|safe}} cubic meter per second </p>
+            </details>
+            {% endif %}
+
+        
+
+            <strong>Put values into formula</strong>
+            <p>  hL = 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / d<sup>4.87</sup> 
+            <p> hL =  10.67 * {{Ib|safe}} * ({{flow|safe}})<sup>1.852</sup> / ({{c|safe}})<sup>1.852</sup> / ({{Ia|safe}})<sup>4.87</sup> </p>
+            <p>Friction head loss = {{F|safe}} m</p>
+
+
+        </div>
+
+    </div>
+    {% endif %}
+
+    
+
+    {% if given_data == "form2" and Ia %}
+    <div class="card" id="magnetic-Pipe Inside Diameter">
+        <div class="card-header">
+            <h2 class="h2">Steps to Calculate Pipe Inside Diameter</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Friction Loss formula-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">hL = 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / d<sup>4.87</sup></p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li> hL represents friction head loss  </li>
+                        <li> L represents length of pipe</li>
+                        <li> d represents internal pipe diameter</li>
+                        <li> Q represents flow rate through the pipe </li>
+                        <li> C represents the Hazen-Williams coefficient, which will vary according to how smooth the internal surfaces of the pipe </li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>Friction Head Loss = {{F1}} {{F_op}} </p>
+            <p>Pipe Length = {{Ib1}} {{Ib_op}}</p>
+            <p>Flow rate = {{flow1}} {% if flow_op != 'l/s' and flow_op != 'l/min' %}{{A}}<sup>3</sup>{{B}}{%else%}{{flow_op}}{%endif%} </p>
+            <p>Hazen-Williams coefficient = {{c}} for  {{mat_op}} </p> 
+        
+        
+           
+            {% if F_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Friction Head Loss  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Converting Friction Head Loss  ={{F1}} {{F_c|safe}}</p>
+                <p>Friction Head Loss ={{F|safe}} m </p>
+            </details>
+            {% endif %}
+
+            {% if Ib_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Pipe Length  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Converting Pipe Length  ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Pipe Length ={{Ib|safe}} m</p>
+            </details>
+            {% endif %}
+
+            
+            {% if flow_op != 'm/s' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the flow  {{flow1}}<b><i>" {% if flow_op != 'l/s' and flow_op != 'l/min' %}{{A}}<sup>3</sup>{{B}}{%else%}{{flow_op}}{%endif%} "</i></b> to
+                    <b><i>"cubic meter per second"</i></b></b>
+                </summary>
+                <p>Convert the flow  ={{flow1}} {{flow_c|safe}}  </p>
+                <p>flow ={{flow|safe}} cubic meter per second </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>  hL = 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / d<sup>4.87</sup> </p>
+            <p> d = { 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / hL }<sup>1/4.87</sup></p>
+            <p> d = { 10.67 * {{Ib|safe}} * ({{flow|safe}})<sup>1.852</sup> / ({{c|safe}})<sup>1.852</sup> / {{F|safe}} }<sup>1/4.87</p>
+            <p>Pipe Inside Diameter = {{Ia|safe}} m</p>
+         
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+
+    {% if given_data == "form3" and Ib %}
+    <div class="card" id="magnetic-Pipe Inside Diameter">
+        <div class="card-header">
+            <h2 class="h2">Steps to Calculate Pipe Length</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Friction Loss formula--</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">hL = 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / d<sup>4.87</sup></p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li> hL represents friction head loss  </li>
+                        <li> L represents length of pipe</li>
+                        <li> d represents internal pipe diameter</li>
+                        <li> Q represents flow rate through the pipe </li>
+                        <li> C represents the Hazen-Williams coefficient, which will vary according to how smooth the internal surfaces of the pipe </li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>Friction Head Loss = {{F1}} {{F_op}} </p>
+            <p>Pipe Inside Diameter = {{Ia1}} {{Ia_op}}</p>
+            <p>Flow rate = {{flow1}} {% if flow_op != 'l/s' and flow_op != 'l/min' %}{{A}}<sup>3</sup>{{B}}{%else%}{{flow_op}}{%endif%}</p>
+            <p>Hazen-Williams coefficient = {{c}} for  {{mat_op}} </p> 
+        
+        
+           
+            {% if F_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Friction Head Loss  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Converting Friction Head Loss  ={{F1}} {{F_c|safe}}</p>
+                <p>Friction Head Loss ={{F|safe}} m </p>
+            </details>
+            {% endif %}
+
+              {% if Ia_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Pipe Inside Diameter  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Converting Pipe Inside Diameter  ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Pipe Inside Diameter ={{Ia|safe}} m </p>
+            </details>
+            {% endif %}
+
+           
+            {% if flow_op != 'm/s' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the flow  {{flow1}}<b><i>"{% if flow_op != 'l/s' and flow_op != 'l/min' %}{{A}}<sup>3</sup>{{B}}{%else%}{{flow_op}}{%endif%}"</i></b> to
+                    <b><i>"cubic meter per second"</i></b></b>
+                </summary>
+                <p>Converting Flow rate  ={{flow1}} {{flow_c|safe}}</p>
+                <p>Flow rate={{flow|safe}} cubic meter per second </p>
+            </details>
+            {% endif %}
+
+            <strong>Put values into formula</strong>
+            <p>  hL = 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / d<sup>4.87</sup>  </p>
+            <p>  L = hL * C<sup>1.852</sup> * d<sup>4.87</sup> /(10.67 * Q<sup>1.852</sup>) </p>
+            <p>  L = {{F|safe}} * ({{c|safe}})<sup>1.852</sup> * ({{Ia|safe}})<sup>4.87</sup> /(10.67 * ({{flow|safe}})<sup>1.852</sup>) </p>
+            <p>Pipe Length  = {{Ib|safe}} </sup> m</p>
+            
+            
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+    {% if given_data == "form4" and flow %}
+    <div class="card" id="magnetic-Pipe Inside Diameter">
+        <div class="card-header">
+            <h2 class="h2">Steps to Calculate flow rate</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Friction Loss formula--</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">hL = 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / d<sup>4.87</sup></p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li> hL represents friction head loss  </li>
+                        <li> L represents length of pipe</li>
+                        <li> d represents internal pipe diameter</li>
+                        <li> Q represents flow rate through the pipe </li>
+                        <li> C represents the Hazen-Williams coefficient, which will vary according to how smooth the internal surfaces of the pipe </li>
+                    </ul>
+
+
+            <strong>Input values are:-</strong>
+            <p>Friction Head Loss = {{F1}} {{F_op}} </p>
+            <p>Pipe Inside Diameter = {{Ia1}} {{Ia_op}}</p>
+            <p>Pipe Length = {{Ib1}} {{Ib_op}}</p>
+            <p>Hazen-Williams coefficient = {{c}} for  {{mat_op}} </p> 
+        
+           
+            {% if F_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Friction Head Loss  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Converting Friction Head Loss  ={{F1}} {{F_c|safe}}</p>
+                <p>Friction Head Loss ={{F|safe}} m </p>
+            </details>
+            {% endif %}
+
+              {% if Ia_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Pipe Inside Diameter  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Converting Pipe Inside Diameter ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Pipe Inside Diameter ={{Ia|safe}} m </p>
+            </details>
+            {% endif %}
+
+           
+            {% if Ib_op != 'm' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Pipe Length  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"m"</i></b></b>
+                </summary>
+                <p>Converting  Pipe Length  ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Pipe Length ={{Ib|safe}} m</p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>  hL = 10.67 * L * Q<sup>1.852</sup> / C<sup>1.852</sup> / d<sup>4.87</sup>  </p>
+            <p>  Q  = { hL * C<sup>1.852</sup> *  d<sup>4.87</sup>/ (10.67 * L) }<sup>1/1.852</sup> </p>
+            <p> Q  = { {{F|safe}} * ({{c|safe}})<sup>1.852</sup> *  ({{Ia|safe}})<sup>4.87</sup>/ (10.67 * {{Ib|safe}}) }<sup>1/1.852</sup></p>
+            <p> Flow Rate = {{flow|safe}}  cubic meter per second</p>
+            
+            
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+
+
+
+</div>
+
+
+
+<script>
+    
+     
+{% if id == 1 %}
+ 
+var scrollDiv = document.getElementById("clear").offsetTop;
+console.log(scrollDiv)
+window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+
+{%endif%}
+
+    
+
+</script>
+
+<script>
+    function myFunction() {
+
+            document.getElementById("clear").innerHTML = "";
+            
+            document.getElementById("mat_op").value="ABS";
+
+            {% if given_data != 'form2' %}    
+            document.getElementById("Ia").value = "";
+            document.getElementById("Ia_op").value="m";
+            {%endif%}
+            
+            {% if given_data != 'form3' %}
+            document.getElementById("Ib").value = "";
+            document.getElementById("Ib_op").value="m";
+            {%endif%}
+
+            {% if given_data != 'form1' %}
+            document.getElementById("F").value=""
+            document.getElementById("F_op").value="m";
+            {% endif %}
+
+            
+            {% if given_data != 'form4' %}
+            document.getElementById("flow").value=""
+            document.getElementById("flow_op").value="m/s";
+            {% endif %}
+    
+    }
+</script>
+<br>
+
+{% endblock %}

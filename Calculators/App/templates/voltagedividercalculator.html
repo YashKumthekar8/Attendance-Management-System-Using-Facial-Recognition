@@ -1,0 +1,3752 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>voltage divider  Calculator | Free Calculator to find voltage divider </title>
+<meta name="description"
+    content="voltage divider  Calculator makes it easy for you to find voltage divider ." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content="voltage divider  Calculator | Free Calculator to find voltage divider " />
+<meta property="og:description" content="voltage divider  Calculator" />
+<meta content="" property="og:site_name" />
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/voltage-divider-calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="voltage divider  Calculator | Free Calculator to find voltage divider " />
+<meta name="twitter:description"
+    content="voltage divider  Calculator makes it easy for you to find voltage divider ." />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/voltage-divider-calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<meta property='og:title' content="voltage divider  Calculatorr | voltage divider " />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/voltage-divider-calculator.jpeg" />
+<meta property='og:description' content="voltage divider  Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock%}
+
+{%block content%}
+
+<style>
+    input {
+        text-align: right;
+    }
+</style>
+
+{%if go_to %}
+<a href="{{go_to}}" id="ddd"></a>
+{%endif%}
+
+<script>
+	  document.addEventListener('DOMContentLoaded', function () {
+		document.getElementById('ddd').click();
+		});
+</script>
+
+
+<form action="" method="POST" id="my_form" >
+{% csrf_token %}
+
+{% if given_option == 'RR' %}
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Voltage divider Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+            
+   <div class="input-group mb-2 col-auto">
+
+    <div class="input-group-prepend mt-1">
+        <div class="input-group-text"><strong>Choose a divider type</strong></div>
+    </div>
+
+ <select name="given_option" id="inlineFormInputGroup1" class="form-control mt-2"
+ onchange="this.form.submit();" autofocus="">
+        
+        {% if given_option == 'RR' %}
+        <option value="RR" selected="selected"> RR Type </option>
+        {% else %}
+        <option value="RR"> RR Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'CC' %}
+        <option value="CC" selected="selected"> CC Type  </option>
+        {% else %}
+        <option value="CC"> CC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'LL' %}
+        <option value="LL" selected="selected"> LL Type  </option>
+        {% else %}
+        <option value="LL"> LL Type </option>
+        {% endif %}
+
+        {% if given_option == 'RC' %}
+        <option value="RC" selected="selected"> RC Type </option>
+        {% else %}
+        <option value="RC"> RC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'RL' %}
+        <option value="RL" selected="selected"> RL Type </option>
+        {% else %}
+        <option value="RL"> RL Type </option>
+        {% endif %}
+
+
+ </select>
+</div>
+
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Choose a Calculation</strong></div>
+                        </div>
+                        <select name="given_data" id="inlineFormInputGroup" class="form-control"
+                            onchange="this.form.submit();" autofocus="">
+
+                            {% if given_data == 'form1' %}
+                            <option value="form1" selected="selected"> Find Output Voltage | Given Resistance 1,Resistance 2 and Input Voltage </option>
+                            {% else %}
+                            <option value="form1"> Find Output Voltage | Given Resistance 1,Resistance 2 and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form2' %}
+                            <option value="form2" selected="selected"> Find Resistance 1 | Given Output Voltage,Resistance 2 and Input Voltage </option>
+                            {% else %}
+                            <option value="form2">Find Resistance 1 | Given Output Voltage,Resistance 2 and Input Voltage  </option>
+                            {% endif %}
+
+                            {% if given_data == 'form3' %}
+                            <option value="form3" selected="selected"> Find Resistance 2 | Given Resistance 1,Output Voltage and Input Voltage
+                            </option>
+                            {% else %}
+                            <option value="form3"> Find Resistance 2 | Given Resistance 1,Output Voltage and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form4' %}
+                            <option value="form4" selected="selected"> Find Input Voltage | Given Resistance 1,Resistance 2 and ,Output Voltage</option>
+                            {% else %}
+                            <option value="form4"> Find Input Voltage | Given Resistance 1,Resistance 2 and ,Output Voltage </option>
+                            {% endif %}
+
+
+
+                        </select>
+                    </div>
+
+                    {% if given_data != "form4" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Input Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="d" {% if d %} value="{{d1}}" {% else %} value="9" {% endif %}>
+
+                            <select class="select form-control" id="inlineFormInputGroup" name="d_op">
+                                                         
+                            {% if d_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if d_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if d_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if d_op == 'Mv' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                            
+                        <select>
+
+
+                    </div>
+                    {% endif %}
+
+                    
+                    {% if given_data != "form2" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Resistance 1</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ia" {% if Ia1 %} value="{{Ia1}}" {% else %} value="10" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ia_op">
+                            {% if Ia_op == 'Ω' %}
+                            <option value="Ω" selected="selected">Ohm(Ω)</option>
+                            {% else %}
+                            <option value="Ω">Ohm(Ω)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'mΩ' %}
+                            <option value="mΩ" selected="selected">milliOhm(mΩ)</option>
+                            {% else %}
+                            <option value="mΩ">milliOhm(mΩ)</option>
+                            {% endif %}
+
+
+                            {% if Ia_op == 'kΩ' %}
+                            <option value="kΩ" selected="selected">KiloOhm(kΩ)</option>
+                            {% else %}
+                            <option value="kΩ">KiloOhm(kΩ)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ia_op == 'MΩ' %}
+                            <option value="MΩ" selected="selected">MegaOhm(MΩ)</option>
+                            {% else %}
+                            <option value="MΩ">MegaOhm(MΩ)</option>
+                            {% endif %}                            
+
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+
+
+
+                    {% if given_data != "form3" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Resistance 2</strong></div>
+                        </div>
+                        <input type="number"  min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ib" {% if Ib %} value="{{Ib1}}" {% else %} value="6" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ib_op">
+                            
+                            {% if Ib_op == 'Ω' %}
+                            <option value="Ω" selected="selected">Ohm(Ω)</option>
+                            {% else %}
+                            <option value="Ω">Ohm(Ω)</option>
+                            {% endif %}
+
+                            {% if Ib_op == 'mΩ' %}
+                            <option value="mΩ" selected="selected">milliOhm(mΩ)</option>
+                            {% else %}
+                            <option value="mΩ">milliOhm(mΩ)</option>
+                            {% endif %}
+
+
+                            {% if Ib_op == 'kΩ' %}
+                            <option value="kΩ" selected="selected">KiloOhm(kΩ)</option>
+                            {% else %}
+                            <option value="kΩ">KiloOhm(kΩ)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ib_op == 'MΩ' %}
+                            <option value="MΩ" selected="selected">MegaOhm(MΩ)</option>
+                            {% else %}
+                            <option value="MΩ">MegaOhm(MΩ)</option>
+                            {% endif %}
+
+                            
+
+
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+
+                    {% if given_data != "form1" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Output Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                           placeholder="Enter number"  class="form-control" name="F" {% if F %} value="{{F1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="F_op">
+                                
+                            {% if F_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if F_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if F_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if F_op == 'MV' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+                    <div class=" center col mt-2 ">
+                        <center><button type="submit" class="btn btn-primary" name="f1">Calculate</button>
+                            <button type="button" onclick="myFunction()" style="margin-top:5px;"
+                                class="btn btn-danger">Reset</button>
+                        </center>
+                    </div>
+
+            {% comment %} </form> {% endcomment %}
+
+
+        </div>
+    </div>
+</div>
+{%endif%}
+
+{% comment %} CC CALCULATOR CODE {% endcomment %}
+{% if given_option == 'CC' %}
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Voltage divider  Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+
+                    
+   <div class="input-group mb-2 col-auto">
+
+    <div class="input-group-prepend mt-1">
+        <div class="input-group-text"><strong>Choose a divider type</strong></div>
+    </div>
+
+ <select name="given_option" id="inlineFormInputGroup1" class="form-control mt-2"
+ onchange="this.form.submit();" autofocus="">
+        
+        {% if given_option == 'RR' %}
+        <option value="RR" selected="selected"> RR Type </option>
+        {% else %}
+        <option value="RR"> RR Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'CC' %}
+        <option value="CC" selected="selected"> CC Type  </option>
+        {% else %}
+        <option value="CC"> CC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'LL' %}
+        <option value="LL" selected="selected"> LL Type  </option>
+        {% else %}
+        <option value="LL"> LL Type </option>
+        {% endif %}
+
+        {% if given_option == 'RC' %}
+        <option value="RC" selected="selected"> RC Type </option>
+        {% else %}
+        <option value="RC"> RC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'RL' %}
+        <option value="RL" selected="selected"> RL Type </option>
+        {% else %}
+        <option value="RL"> RL Type </option>
+        {% endif %}
+
+
+ </select>
+</div>
+
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Choose a Calculation</strong></div>
+                        </div>
+                        <select name="given_data" id="inlineFormInputGroup" class="form-control"
+                            onchange="this.form.submit();" autofocus="">
+
+                            {% if given_data == 'form1' %}
+                            <option value="form1" selected="selected"> Find Output Voltage | Given Capacitance 1,Capacitance 2 and Input Voltage </option>
+                            {% else %}
+                            <option value="form1"> Find Output Voltage | Given Capacitance 1,Capacitance 2 and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form2' %}
+                            <option value="form2" selected="selected"> Find Capacitance 1 | Given Output Voltage,Capacitance 2 and Input Voltage </option>
+                            {% else %}
+                            <option value="form2">Find Capacitance 1 | Given Output Voltage,Capacitance 2 and Input Voltage  </option>
+                            {% endif %}
+
+                            {% if given_data == 'form3' %}
+                            <option value="form3" selected="selected"> Find Capacitance 2 | Given Capacitance 1,Output Voltage and Input Voltage
+                            </option>
+                            {% else %}
+                            <option value="form3"> Find Capacitance 2 | Given Capacitance 1,Output Voltage and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form4' %}
+                            <option value="form4" selected="selected"> Find Input Voltage | Given Capacitance 1,Capacitance 2 and ,Output Voltage</option>
+                            {% else %}
+                            <option value="form4"> Find Input Voltage | Given Capacitance 1,Capacitance 2 and ,Output Voltage </option>
+                            {% endif %}
+
+
+
+                        </select>
+                    </div>
+
+                    {% if given_data != "form4" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Input Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="d" {% if d %} value="{{d1}}" {% else %} value="9" {% endif %}>
+
+                            <select class="select form-control" id="inlineFormInputGroup" name="d_op">
+                                                         
+                            {% if d_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if d_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if d_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if d_op == 'Mv' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                            
+                        <select>
+
+
+                    </div>
+                    {% endif %}
+
+                    
+
+                    {% if given_data != "form2" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Capacitance 1</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ia" {% if Ia1 %} value="{{Ia1}}" {% else %} value="10" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ia_op">
+                        
+                            {% if Ia_op == 'F' %}
+                            <option value="F" selected="selected">Farad(F)</option>
+                            {% else %}
+                            <option value="F">Farad(F)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'mF' %}
+                            <option value="mF" selected="selected">milliFarad(mF)</option>
+                            {% else %}
+                            <option value="mF">milliFarad(mF)</option>
+                            {% endif %}
+
+
+                            {% if Ia_op == 'nF' %}
+                            <option value="nF" selected="selected">nanoFarad(nF)</option>
+                            {% else %}
+                            <option value="nF">nanoFarad(nF)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ia_op == 'µF' %}
+                            <option value="µF" selected="selected">MicroFarad(µF)</option>
+                            {% else %}
+                            <option value="µF">MicroFarad(µF)</option>
+                            {% endif %}
+
+                            
+
+
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+
+
+
+
+                    {% if given_data != "form3" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Capacitance 2</strong></div>
+                        </div>
+                        <input type="number"  min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ib" {% if Ib %} value="{{Ib1}}" {% else %} value="6" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ib_op">
+                            
+                            {% if Ib_op == 'F' %}
+                            <option value="F" selected="selected">Farad(F)</option>
+                            {% else %}
+                            <option value="F">Farad(F)</option>
+                            {% endif %}
+
+                            {% if Ib_op == 'mF' %}
+                            <option value="mF" selected="selected">milliFarad(mF)</option>
+                            {% else %}
+                            <option value="mF">milliFarad(mF)</option>
+                            {% endif %}
+
+
+                            {% if Ib_op == 'nF' %}
+                            <option value="nF" selected="selected">nanoFarad(nF)</option>
+                            {% else %}
+                            <option value="nF">nanoFarad(nF)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ib_op == 'µF' %}
+                            <option value="µF" selected="selected">MicroFarad(µF)</option>
+                            {% else %}
+                            <option value="µF">MicroFarad(µF)</option>
+                            {% endif %}
+
+                        
+                        </select>
+                    </div>
+                    {% endif %}
+
+                    {% if given_data != "form1" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Output Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                           placeholder="Enter number"  class="form-control" name="F" {% if F %} value="{{F1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="F_op">
+                                
+                            {% if F_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if F_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if F_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if F_op == 'MV' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+                    <div class=" center col mt-2 ">
+                        <center><button type="submit" class="btn btn-primary" name="f1">Calculate</button>
+                            <button type="button" onclick="myFunction()" style="margin-top:5px;"
+                                class="btn btn-danger">Reset</button>
+                        </center>
+                    </div>
+
+            {% comment %} </form> {% endcomment %}
+
+
+        </div>
+    </div>
+</div>
+{%endif%}
+
+
+{% if given_option == 'LL' %}
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Voltage divider Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+
+                    
+   <div class="input-group mb-2 col-auto">
+
+    <div class="input-group-prepend mt-1">
+        <div class="input-group-text"><strong>Choose a divider type</strong></div>
+    </div>
+
+ <select name="given_option" id="inlineFormInputGroup1" class="form-control mt-2"
+ onchange="this.form.submit();" autofocus="">
+        
+        {% if given_option == 'RR' %}
+        <option value="RR" selected="selected"> RR Type </option>
+        {% else %}
+        <option value="RR"> RR Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'CC' %}
+        <option value="CC" selected="selected"> CC Type  </option>
+        {% else %}
+        <option value="CC"> CC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'LL' %}
+        <option value="LL" selected="selected"> LL Type  </option>
+        {% else %}
+        <option value="LL"> LL Type </option>
+        {% endif %}
+
+        {% if given_option == 'RC' %}
+        <option value="RC" selected="selected"> RC Type </option>
+        {% else %}
+        <option value="RC"> RC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'RL' %}
+        <option value="RL" selected="selected"> RL Type </option>
+        {% else %}
+        <option value="RL"> RL Type </option>
+        {% endif %}
+
+
+ </select>
+</div>
+
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Choose a Calculation</strong></div>
+                        </div>
+                        <select name="given_data" id="inlineFormInputGroup" class="form-control"
+                            onchange="this.form.submit();" autofocus="">
+
+                            {% if given_data == 'form1' %}
+                            <option value="form1" selected="selected"> Find Output Voltage | Given Inductance 1,Inductance 2 and Input Voltage </option>
+                            {% else %}
+                            <option value="form1"> Find Output Voltage | Given Inductance 1,Inductance 2 and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form2' %}
+                            <option value="form2" selected="selected"> Find Inductance 1 | Given Output Voltage,Inductance 2 and Input Voltage </option>
+                            {% else %}
+                            <option value="form2">Find Inductance 1 | Given Output Voltage,Inductance 2 and Input Voltage  </option>
+                            {% endif %}
+
+                            {% if given_data == 'form3' %}
+                            <option value="form3" selected="selected"> Find Inductance 2 | Given Inductance 1,Output Voltage and Input Voltage
+                            </option>
+                            {% else %}
+                            <option value="form3"> Find Inductance 2 | Given Inductance 1,Output Voltage and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form4' %}
+                            <option value="form4" selected="selected"> Find Input Voltage | Given Inductance 1,Inductance 2 and ,Output Voltage</option>
+                            {% else %}
+                            <option value="form4"> Find Input Voltage | Given Inductance 1,Inductance 2 and ,Output Voltage </option>
+                            {% endif %}
+
+
+
+                        </select>
+                    </div>
+
+                    {% if given_data != "form4" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Input Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="d" {% if d %} value="{{d1}}" {% else %} value="9" {% endif %}>
+
+                            <select class="select form-control" id="inlineFormInputGroup" name="d_op">
+                                                         
+                            {% if d_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if d_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if d_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if d_op == 'Mv' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                            
+                        <select>
+
+
+                    </div>
+                    {% endif %}
+
+                    {% if given_data != "form2" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Inductance 1</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ia" {% if Ia1 %} value="{{Ia1}}" {% else %} value="10" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ia_op">
+                        
+                            {% if Ia_op == 'H' %}
+                            <option value="H" selected="selected">Henry(H)</option>
+                            {% else %}
+                            <option value="H">Henry(H)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'mH' %}
+                            <option value="mH" selected="selected">milliHenry(mH)</option>
+                            {% else %}
+                            <option value="mH">milliHenry(mH)</option>
+                            {% endif %}
+
+
+                            {% if Ia_op == 'μH' %}
+                            <option value="μH" selected="selected">microHenry(μH)</option>
+                            {% else %}
+                            <option value="μH">microHenry(μH)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ia_op == 'nH' %}
+                            <option value="nH" selected="selected">nanoHenry(nH)</option>
+                            {% else %}
+                            <option value="nH">nanoHenry(nH)</option>
+                            {% endif %}
+
+                        
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+
+                    {% if given_data != "form3" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Inductance 2</strong></div>
+                        </div>
+                        <input type="number"  min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ib" {% if Ib %} value="{{Ib1}}" {% else %} value="6" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ib_op">
+                            
+                            {% if Ib_op == 'H' %}
+                            <option value="H" selected="selected">Henry(H)</option>
+                            {% else %}
+                            <option value="H">Henry(H)</option>
+                            {% endif %}
+
+                            {% if Ib_op == 'mH' %}
+                            <option value="mH" selected="selected">milliHenry(mH)</option>
+                            {% else %}
+                            <option value="mH">milliHenry(mH)</option>
+                            {% endif %}
+
+
+                            {% if Ib_op == 'μH' %}
+                            <option value="μH" selected="selected">microHenry(μH)</option>
+                            {% else %}
+                            <option value="μH">microHenry(μH)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ib_op == 'nH' %}
+                            <option value="nH" selected="selected">nanoHenry(nH)</option>
+                            {% else %}
+                            <option value="nH">nanoHenry(nH)</option>
+                            {% endif %}
+
+                        
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+
+
+                    {% if given_data != "form1" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Output Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                           placeholder="Enter number"  class="form-control" name="F" {% if F %} value="{{F1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="F_op">
+                                
+                            {% if F_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if F_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if F_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if F_op == 'MV' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+                    <div class=" center col mt-2 ">
+                        <center><button type="submit" class="btn btn-primary" name="f1">Calculate</button>
+                            <button type="button" onclick="myFunction()" style="margin-top:5px;"
+                                class="btn btn-danger">Reset</button>
+                        </center>
+                    </div>
+
+            {% comment %} </form> {% endcomment %}
+
+
+        </div>
+    </div>
+</div>
+{%endif%}
+
+
+
+{% if given_option == 'RC' %}
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Voltage divider  Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+
+                    
+   <div class="input-group mb-2 col-auto">
+
+    <div class="input-group-prepend mt-1">
+        <div class="input-group-text"><strong>Choose a divider type</strong></div>
+    </div>
+
+ <select name="given_option" id="inlineFormInputGroup1" class="form-control mt-2"
+ onchange="this.form.submit();" autofocus="">
+        
+        {% if given_option == 'RR' %}
+        <option value="RR" selected="selected"> RR Type </option>
+        {% else %}
+        <option value="RR"> RR Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'CC' %}
+        <option value="CC" selected="selected"> CC Type  </option>
+        {% else %}
+        <option value="CC"> CC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'LL' %}
+        <option value="LL" selected="selected"> LL Type  </option>
+        {% else %}
+        <option value="LL"> LL Type </option>
+        {% endif %}
+
+        {% if given_option == 'RC' %}
+        <option value="RC" selected="selected"> RC Type </option>
+        {% else %}
+        <option value="RC"> RC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'RL' %}
+        <option value="RL" selected="selected"> RL Type </option>
+        {% else %}
+        <option value="RL"> RL Type </option>
+        {% endif %}
+
+
+ </select>
+</div>
+
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Choose a Calculation</strong></div>
+                        </div>
+                        <select name="given_data" id="inlineFormInputGroup" class="form-control"
+                            onchange="this.form.submit();" autofocus="">
+
+                            {% if given_data == 'form1' %}
+                            <option value="form1" selected="selected"> Find Output Voltage | Given Capacitance,resistance,frequency and Input Voltage </option>
+                            {% else %}
+                            <option value="form1"> Find Output Voltage | Given Capacitance,resistance,frequency and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form2' %}
+                            <option value="form2" selected="selected"> Find Capacitance | Given Output Voltage,resistance,frequency  and Input Voltage </option>
+                            {% else %}
+                            <option value="form2">Find Capacitance | Given Output Voltage,resistance ,frequency and Input Voltage  </option>
+                            {% endif %}
+
+                            {% if given_data == 'form3' %}
+                            <option value="form3" selected="selected"> Find resistance | Given Capacitance,Output Voltage,frequency and Input Voltage
+                            </option>
+                            {% else %}
+                            <option value="form3"> Find resistance | Given Capacitance,Output Voltage,frequency and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form4' %}
+                            <option value="form4" selected="selected"> Find Input Voltage | Given Capacitance,resistance,frequency and ,Output Voltage</option>
+                            {% else %}
+                            <option value="form4"> Find Input Voltage | Given Capacitance,resistance,frequency and Output Voltage </option>
+                            {% endif %}
+
+                            
+                            {% if given_data == 'form5' %}
+                            <option value="form5" selected="selected"> Find frequency | Given Capacitance,resistance,Input Voltage and Output Voltage</option>
+                            {% else %}
+                            <option value="form5"> Find frequency | Given Capacitance,resistance,Input Voltage and Output Voltage </option>
+                            {% endif %}
+
+                        </select>
+                    </div>
+
+                    {% if given_data != "form4" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Input Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="d" {% if d %} value="{{d1}}" {% else %} value="9" {% endif %}>
+
+                            <select class="select form-control" id="inlineFormInputGroup" name="d_op">
+                                                         
+                            {% if d_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if d_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if d_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if d_op == 'MV' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                            
+                        <select>
+
+
+                    </div>
+                    {% endif %}
+
+
+
+
+                    {% if given_data != "form3" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>resistance</strong></div>
+                        </div>
+                        <input type="number"  min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ib" {% if Ib %} value="{{Ib1}}" {% else %} value="6" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ib_op">
+                            
+                            {% if Ib_op == 'Ω' %}
+                            <option value="Ω" selected="selected">ohm(Ω)</option>
+                            {% else %}
+                            <option value="Ω">ohm(Ω)</option>
+                            {% endif %}
+
+                            {% if Ib_op == 'mΩ' %}
+                            <option value="mΩ" selected="selected">milliOhm(mΩ)</option>
+                            {% else %}
+                            <option value="mΩ">milliOhm(mΩ)</option>
+                            {% endif %}
+
+
+                            {% if Ib_op == 'kΩ' %}
+                            <option value="kΩ" selected="selected">KiloOhm(kΩ)</option>
+                            {% else %}
+                            <option value="kΩ">KiloOhm(kΩ)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ib_op == 'MΩ' %}
+                            <option value="MΩ" selected="selected">megaOhm(MΩ)</option>
+                            {% else %}
+                            <option value="MΩ">megaOhm(MΩ)</option>
+                            {% endif %}
+
+                        
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+                    {% if given_data != "form2" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Capacitance</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ia" {% if Ia1 %} value="{{Ia1}}" {% else %} value="10" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ia_op">
+                        
+                            {% if Ia_op == 'F' %}
+                            <option value="F" selected="selected">Farad(F)</option>
+                            {% else %}
+                            <option value="F">Farad(F)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'mF' %}
+                            <option value="mF" selected="selected">milliFarad(mF)</option>
+                            {% else %}
+                            <option value="mF">milliFarad(mF)</option>
+                            {% endif %}
+
+
+                            {% if Ia_op == 'nF' %}
+                            <option value="nF" selected="selected">nanoFarad(nF)</option>
+                            {% else %}
+                            <option value="nF">nanoFarad(nF)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ia_op == 'µF' %}
+                            <option value="µF" selected="selected">MicroFarad(µF)</option>
+                            {% else %}
+                            <option value="µF">MicroFarad(µF)</option>
+                            {% endif %}
+
+                            
+
+
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+                    {% if given_data != "form1" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Output Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                           placeholder="Enter number"  class="form-control" name="F" {% if F %} value="{{F1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="F_op">
+                                
+                            {% if F_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if F_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if F_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if F_op == 'MV' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if given_data != "form5" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>frequency</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                           placeholder="Enter number"  class="form-control" name="p" {% if p %} value="{{p1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="p_op">
+                                
+                            {% if p_op == 'Hz' %}
+                            <option value="HZ" selected="selected">Hertz(Hz)</option>
+                            {% else %}
+                            <option value="Hz">Hertz(Hz)</option>
+                            {% endif %}
+
+                            {% if p_op == 'mHz' %}
+                            <option value="mHz" selected="selected">milliHertz(mHz)</option>
+                            {% else %}
+                            <option value="mHz">milliHertz(mHz)</option>
+                            {% endif %}
+
+                            {% if p_op == 'kHz' %}
+                            <option value="kHz" selected="selected">kiloHertz(kHZ)</option>
+                            {% else %}
+                            <option value="kHz">kiloHertz(kHZ)</option>
+                            {% endif %}
+
+
+                            {% if p_op == 'MHz' %}
+                            <option value="MHz" selected="selected">megaHertz(MHz)</option>
+                            {% else %}
+                            <option value="MHz">megaHertz(MHz)</option>
+                            {% endif %}
+
+                
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class=" center col mt-2 ">
+                        <center><button type="submit" class="btn btn-primary" name="f1">Calculate</button>
+                            <button type="button" onclick="myFunction()" style="margin-top:5px;"
+                                class="btn btn-danger">Reset</button>
+                        </center>
+                    </div>
+
+            {% comment %} </form> {% endcomment %}
+
+
+        </div>
+    </div>
+</div>
+{%endif%}
+
+
+
+{% if given_option == 'RL' %}
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Voltage divider  Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message }}</p>
+                {% endfor %}
+            </ul>
+
+                    
+   <div class="input-group mb-2 col-auto">
+
+    <div class="input-group-prepend mt-1">
+        <div class="input-group-text"><strong>Choose a divider type</strong></div>
+    </div>
+
+ <select name="given_option" id="inlineFormInputGroup1" class="form-control mt-2"
+ onchange="this.form.submit();" autofocus="">
+        
+        {% if given_option == 'RR' %}
+        <option value="RR" selected="selected"> RR Type </option>
+        {% else %}
+        <option value="RR"> RR Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'CC' %}
+        <option value="CC" selected="selected"> CC Type  </option>
+        {% else %}
+        <option value="CC"> CC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'LL' %}
+        <option value="LL" selected="selected"> LL Type  </option>
+        {% else %}
+        <option value="LL"> LL Type </option>
+        {% endif %}
+
+        {% if given_option == 'RC' %}
+        <option value="RC" selected="selected"> RC Type </option>
+        {% else %}
+        <option value="RC"> RC Type </option>
+        {% endif %}
+
+        
+        {% if given_option == 'RL' %}
+        <option value="RL" selected="selected"> RL Type </option>
+        {% else %}
+        <option value="RL"> RL Type </option>
+        {% endif %}
+
+
+ </select>
+</div>
+
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Choose a Calculation</strong></div>
+                        </div>
+                        <select name="given_data" id="inlineFormInputGroup" class="form-control"
+                            onchange="this.form.submit();" autofocus="">
+
+                            {% if given_data == 'form1' %}
+                            <option value="form1" selected="selected"> Find Output Voltage | Given Inductance,resistance,frequency and Input Voltage </option>
+                            {% else %}
+                            <option value="form1"> Find Output Voltage | Given Inductance,resistance,frequency and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form2' %}
+                            <option value="form2" selected="selected"> Find Inductance | Given Output Voltage,resistance,frequency  and Input Voltage </option>
+                            {% else %}
+                            <option value="form2">Find Inductance | Given Output Voltage,resistance ,frequency and Input Voltage  </option>
+                            {% endif %}
+
+                            {% if given_data == 'form3' %}
+                            <option value="form3" selected="selected"> Find resistance | Given Inductance,Output Voltage,frequency and Input Voltage
+                            </option>
+                            {% else %}
+                            <option value="form3"> Find resistance | Given Inductance,Output Voltage,frequency and Input Voltage </option>
+                            {% endif %}
+
+                            {% if given_data == 'form4' %}
+                            <option value="form4" selected="selected"> Find Input Voltage | Given Inductance,resistance,frequency and ,Output Voltage</option>
+                            {% else %}
+                            <option value="form4"> Find Input Voltage | Given Inductance,resistance,frequency and Output Voltage </option>
+                            {% endif %}
+
+                            
+                            {% if given_data == 'form5' %}
+                            <option value="form5" selected="selected"> Find frequency | Given Inductance,resistance,Input Voltage and Output Voltage</option>
+                            {% else %}
+                            <option value="form5"> Find frequency | Given Inductance,resistance,Input Voltage and Output Voltage </option>
+                            {% endif %}
+
+                        </select>
+                    </div>
+
+                    {% if given_data != "form4" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Input Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="d" {% if d %} value="{{d1}}" {% else %} value="9" {% endif %}>
+
+                            <select class="select form-control" id="inlineFormInputGroup" name="d_op">
+                                                         
+                            {% if d_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if d_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if d_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if d_op == 'MV' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                            
+                        <select>
+
+
+                    </div>
+                    {% endif %}
+
+
+
+
+                    {% if given_data != "form3" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>resistance</strong></div>
+                        </div>
+                        <input type="number"  min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ib" {% if Ib %} value="{{Ib1}}" {% else %} value="6" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ib_op">
+                            
+                            {% if Ib_op == 'Ω' %}
+                            <option value="Ω" selected="selected">ohm(Ω)</option>
+                            {% else %}
+                            <option value="Ω">ohm(Ω)</option>
+                            {% endif %}
+
+                            {% if Ib_op == 'mΩ' %}
+                            <option value="mΩ" selected="selected">milliOhm(mΩ)</option>
+                            {% else %}
+                            <option value="mΩ">milliOhm(mΩ)</option>
+                            {% endif %}
+
+
+                            {% if Ib_op == 'kΩ' %}
+                            <option value="kΩ" selected="selected">KiloOhm(kΩ)</option>
+                            {% else %}
+                            <option value="kΩ">KiloOhm(kΩ)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ib_op == 'MΩ' %}
+                            <option value="MΩ" selected="selected">megaOhm(MΩ)</option>
+                            {% else %}
+                            <option value="MΩ">megaOhm(MΩ)</option>
+                            {% endif %}
+
+                        
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+                    {% if given_data != "form2" %}
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Inductance</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                            placeholder="Enter number"  class="form-control" name="Ia" {% if Ia1 %} value="{{Ia1}}" {% else %} value="10" {% endif %}>
+
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="Ia_op">
+                        
+                            {% if Ia_op == 'H' %}
+                            <option value="H" selected="selected">Henry(H)</option>
+                            {% else %}
+                            <option value="H">Henry(H)</option>
+                            {% endif %}
+
+                            {% if Ia_op == 'mH' %}
+                            <option value="mH" selected="selected">milliHenry(mH)</option>
+                            {% else %}
+                            <option value="mH">milliHenry(mH)</option>
+                            {% endif %}
+
+
+                            {% if Ia_op == 'nH' %}
+                            <option value="nH" selected="selected">nanoHenry(nH)</option>
+                            {% else %}
+                            <option value="nH">nanoHenry(nH)</option>
+                            {% endif %}
+
+                            
+                            
+                            {% if Ia_op == 'µH' %}
+                            <option value="µH" selected="selected">MicroHenry(µH)</option>
+                            {% else %}
+                            <option value="µH">MicroHenry(µH)</option>
+                            {% endif %}
+
+                        
+                        </select>
+                    </div>
+                    {% endif %}
+
+
+                    {% if given_data != "form1" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Output Voltage</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                           placeholder="Enter number"  class="form-control" name="F" {% if F %} value="{{F1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="F_op">
+                                
+                            {% if F_op == 'V' %}
+                            <option value="V" selected="selected">Volt(V)</option>
+                            {% else %}
+                            <option value="V">Volt(V)</option>
+                            {% endif %}
+
+                            {% if F_op == 'mV' %}
+                            <option value="mV" selected="selected">milliVolt(mV)</option>
+                            {% else %}
+                            <option value="mV">milliVolt(mV)</option>
+                            {% endif %}
+
+                            {% if F_op == 'kV' %}
+                            <option value="kV" selected="selected">kiloVolt(kV)</option>
+                            {% else %}
+                            <option value="kV">kiloVolt(kV)</option>
+                            {% endif %}
+
+
+                            {% if F_op == 'MV' %}
+                            <option value="MV" selected="selected">megaVolt(MV)</option>
+                            {% else %}
+                            <option value="MV">megaVolt(MV)</option>
+                            {% endif %}
+
+                
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if given_data != "form5" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>frequency</strong></div>
+                        </div>
+                        <input type="number" min="0.0000000000001" step="0.001" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                           placeholder="Enter number"  class="form-control" name="p" {% if p %} value="{{p1}}" {% else %} value="7" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="p_op">
+                                
+                            {% if p_op == 'Hz' %}
+                            <option value="HZ" selected="selected">Hertz(Hz)</option>
+                            {% else %}
+                            <option value="Hz">Hertz(Hz)</option>
+                            {% endif %}
+
+                            {% if p_op == 'mHz' %}
+                            <option value="mHz" selected="selected">milliHertz(mHz)</option>
+                            {% else %}
+                            <option value="mHz">milliHertz(mHz)</option>
+                            {% endif %}
+
+                            {% if p_op == 'kHz' %}
+                            <option value="kHz" selected="selected">kiloHertz(kHZ)</option>
+                            {% else %}
+                            <option value="kHz">kiloHertz(kHZ)</option>
+                            {% endif %}
+
+
+                            {% if p_op == 'MHz' %}
+                            <option value="MHz" selected="selected">megaHertz(MHz)</option>
+                            {% else %}
+                            <option value="MHz">megaHertz(MHz)</option>
+                            {% endif %}
+
+                
+
+                        </select>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class=" center col mt-2 ">
+                        <center><button type="submit" class="btn btn-primary" name="f1">Calculate</button>
+                            <button type="button" onclick="myFunction()" style="margin-top:5px;"
+                                class="btn btn-danger">Reset</button>
+                        </center>
+                    </div>
+
+            {% comment %} </form> {% endcomment %}
+
+
+        </div>
+    </div>
+
+{%endif%}
+
+
+
+</form>
+
+
+{% if given_option == 'RR' and id == 1 %}
+<div id="clear">
+
+    {% if given_data == "form1" and F %}
+    <div class="card" id="magnetic-force">
+        <div class="card-header">
+            <h2 class="h2">Steps to Output Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Formula for the Output Voltage is -</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">V₂ = R₂ / (R₁ + R₂) * V₁</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V₂ is the output voltage, </li>
+                        <li>R₂ is the Resistance 2,</li>
+                        <li>R₁ is the Resistance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Resistance 1 = {{Ia1}} {{Ia_op}} </p>
+            <p>Resistance 2 = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}}</p>
+           
+            {% if Ia_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Converting the Resistance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                    
+                </summary>
+                <p>Resistance 1  ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Resistance 1 ={{Ia|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Resistance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>Electric  Field ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Resistance 2 ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+        
+
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = R₂ / (R₁ + R₂) * V₁</p>
+            <p>V₂= {{Ib|safe}} X {{d|safe}} / ( {{Ia|safe}} + {{Ib|safe}} ) </p>
+
+             {% if F != -1 %}
+            <p> Output Voltage  = {{F|safe}} V</p>
+            {%else%}
+            <p> Output Voltage  = {{base}} X 10 <sup>{{power}}</sup> V</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+    {% if given_data == "form2" and Ia %}
+    <div class="card" id="current-in-first-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to calculate Resistance 1</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Resistance 1 formula:-</strong>
+            <br>  
+            <p class="btn btn-outline-secondary active"> R₁= R₂* V₁/V₂ -R₂</p>
+            <br>
+            <strong>where:</strong>
+                    <ul> 
+                        <li>V₂ is the output voltage, </li>
+                        <li>R₂ is the Resistance 2,</li>
+                        <li>R₁ is the Resistance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F|safe}} {{F_op}} </p>
+            <p>Resistance 2 = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+
+             
+           
+            
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Resistance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>Electric  Field ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Resistance 2 ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage={{F1}} {{F_|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>R₁= R₂* V₁/V₂ -R₂</p>
+            <p>R₁ = {{Ib|safe}} * {{d|safe}} / {{F|safe}} - {{Ib|safe}}</p>
+           
+             {% if Ia != -1 %}
+            <p> Resistance 1 = {{Ia|safe}} Ω</p>
+            {%else%}
+            <p>Resistance 1 = {{base}} X 10 <sup>{{power}}</sup> Ω</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form3" and Ib %}
+    <div class="card" id="current-in-second-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to find Resistance 2 :</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Resistance 2  formula:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active"> R₂=  R₁* V₁/(V₁-V₂)  </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>      
+                       <li>V₂ is the output voltage, </li>
+                        <li>R₂ is the Resistance 2,</li>
+                        <li>R₁ is the Resistance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F|safe}} {{F_op}} </p>
+            <p>Resistance 1 = {{Ia1}} {{Ia_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+
+             
+        
+            {% if Ia_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Converting the Resistance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                    
+                </summary>
+                <p>Resistance 1  ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Resistance 1 ={{Ia|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage={{F1}} {{F_|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+
+            <strong>Put values into formula</strong>
+            <p> R₂=  R₁* V₁/(V₁-V₂)</p>
+            <p>R₂ = {{Ia|safe}} * {{F|safe}} /( {{d|safe}} - {{F|safe}})</p>
+            <p> Resistance 2 = {{Ib|safe}} Ω</p>
+            
+
+        </div>
+
+    </div>
+    {% endif %}
+
+    {% if given_data == "form4" and d %}
+    <div class="card" id="distance">
+        <div class="card-header">
+            <h2 class="h2">Steps to find the Input Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Input Voltage formula:-</strong>
+            <br> 
+            <p class="btn btn-outline-secondary active"> V₁ = (R₁ + R₂) * V₂ / R₂    </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                       <li>V₂ is the output voltage, </li>
+                        <li>R₂ is the Resistance 2,</li>
+                        <li>R₁ is the Resistance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p> Output Voltage = {{F1}}  {{F_op}} </p>
+            <p>Resistance 1 = {{Ia1}} {{Ia_op}}</p>
+            <p>Resistance 2 = {{Ib1}} {{Ib_op}}/C</p>
+
+            {% if Ia_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Converting the Resistance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                    
+                </summary>
+                <p>Resistance 1  ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Resistance 1 ={{Ia|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Resistance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>Electric  Field ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Resistance 2 ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage={{F1}} {{F_|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+
+            <strong>Put values into formula</strong>
+            <p>V₁ = (R₁ + R₂) * V₂ / R₂ </p>
+            <p>Input Voltage ={{F|safe}} X ( {{Ia|safe}} + {{Ib|safe}} ) / {{Ib|safe}} </p>
+            <p> Input Voltage = {{d|safe}} V</p>
+        </div>
+
+    </div>
+    {% endif %}
+
+</div>
+
+{%endif%}
+
+
+{% if given_option == 'CC' %}
+<div id="clear">
+
+    {% if given_data == "form1" and F %}
+    <div class="card" id="magnetic-force">
+        <div class="card-header">
+            <h2 class="h2">Steps to Output Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Formula for the Output Voltage is -</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">V₂ = C₁ / (C₂ + C₁) * V₁</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V₂ is the output voltage, </li>
+                        <li>C₁ is the Capacitance 1,</li>
+                        <li>C₂ is the Capacitance 2,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Capacitance 1 = {{Ia1}} {{Ia_op}} </p>
+            <p>Capacitance 2 = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}}</p>
+           
+            {% if Ia_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance 1  ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Capacitance 1 ={{Ia|safe}} F </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance 2 in ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Capacitance 2 ={{Ib|safe}} F </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage  ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = C₁ / (C₂ + C₁) * V₁</p>
+            <p>V₂= {{Ia|safe}} X {{d|safe}} / ( {{Ia|safe}} + {{Ib|safe}} ) </p>
+            
+             {% if F != -1 %}
+            <p> Output Voltage = {{F|safe}} V</p>
+            {%else%}
+            <p>Output Voltage  = {{base}} X 10 <sup>{{power}}</sup> </p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+    {% if given_data == "form2" and Ia %}
+    <div class="card" id="current-in-first-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to calculate Capacitance 1</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Capacitance 1 formula:-</strong>
+            <br>  
+            <p class="btn btn-outline-secondary active"> C₁= C₂*V₂/(V₁-V₂)</p>
+            <br>
+            <strong>where:</strong>
+                    <ul> 
+                        <li>V₂ is the output voltage, </li>
+                        <li>C₁ is the Capacitance 2,</li>
+                        <li>C₂ is the Capacitance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F1}} {{F_op}} </p>
+            <p>Capacitance 2 = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+
+            
+            {% if Ib_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance 2 in ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Capacitance 2 ={{Ib|safe}} F </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage  ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage  ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+             
+            
+            <strong>Put values into formula</strong>
+            <p>C₁= C₂*V₂/(V₁-V₂)</p>
+            <p>C₁ = {{Ib|safe}} * {{F|safe}} /({{d|safe}} - {{F|safe}})</p>
+            
+             {% if Ia != -1 %}
+            <p> Capacitance 1 = {{Ia|safe}} F</p>
+            {%else%}
+            <p> Capacitance 1  = {{base}} X 10 <sup>{{power}}</sup> F</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form3" and Ib %}
+    <div class="card" id="current-in-second-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to find Capacitance 2 :</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Capacitance 2  formula:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active"> C₁= C₂* V₁/V₂ - C₂  </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>      
+                       <li>V₂ is the output voltage, </li>
+                        <li>C₁ is the Capacitance 2,</li>
+                        <li>C₂ is the Capacitance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F1}} {{F_op}} </p>
+            <p>Capacitance 1 = {{Ia1}} {{Ia_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+
+             
+            {% if Ia_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance 1  ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Capacitance 1 ={{Ia|safe}} F </p>
+            </details>
+            {% endif %}
+
+            
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage  ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage  ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>C₁= C₂* V₁/V₂ - C₂ </p>
+            <p>C₁ = {{Ia|safe}} * {{d|safe}} / {{F|safe}} - {{Ia|safe}}</p>
+            <p> Capacitance 2 = {{Ib|safe}} F</p>
+            
+        </div>
+
+    </div>
+    {% endif %}
+
+    {% if given_data == "form4" and d %}
+    <div class="card" id="distance">
+        <div class="card-header">
+            <h2 class="h2">Steps to find the Input Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Input Voltage formula:-</strong>
+            <br> 
+            <p class="btn btn-outline-secondary active"> V₁ = (C₂ + C₁) * V₂ / C₁    </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                       <li>V₂ is the output voltage, </li>
+                        <li>C₁ is the Capacitance 2,</li>
+                        <li>C₂ is the Capacitance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p> Output Voltage = {{F1}}  {{F_op}} </p>
+            <p>Capacitance 1 = {{Ia1}} {{Ia_op}}</p>
+            <p>Capacitance 2 = {{Ib1}} {{Ib_op}}</p>
+
+          
+            {% if Ia_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance 1  ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Capacitance 1 ={{Ia|safe}} F </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance 2 in ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Capacitance 2 ={{Ib|safe}} F </p>
+            </details>
+            {% endif %}
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage  ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>V₁ = (C₂ + C₁) * V₂ / C₁ </p>
+            <p>Input Voltage ={{F|safe}} X ( {{Ia|safe}} + {{Ib|safe}} ) / {{Ia|safe}} </p>
+            
+             {% if d != -1 %}
+            <p> Input Voltage = {{d|safe}} V</p>
+            {%else%}
+            <p>Input Voltage  = {{base}} X 10 <sup>{{power}}</sup> V</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+</div>
+
+{%endif%}
+
+{% if given_option == 'LL'  %}
+<div id="clear">
+
+    {% if given_data == "form1" and F %}
+    <div class="card" id="magnetic-force">
+        <div class="card-header">
+            <h2 class="h2">Steps to Output Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Formula for the Output Voltage is -</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">V₂ = L₂ / (L₁ + L₂) * V₁</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V₂ is the output voltage, </li>
+                        <li>L₂ is the Inductance 2,</li>
+                        <li>L₁ is the Inductance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Inductance 1 = {{Ia1}} {{Ia_op}} </p>
+            <p>Inductance 2 = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}}</p>
+           
+            {% if Ia_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance 1 in ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Inductance 1 ={{Ia|safe}} H </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance 2 ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Inductance 2 ={{Ib|safe}} H </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = L₂ / (L₁ + L₂) * V₁</p>
+            <p>V₂= {{Ib|safe}} X {{d|safe}} / ( {{Ia|safe}} + {{Ib|safe}} ) </p>
+
+            {% if F != -1 %}
+            <p> Output Voltage = {{F|safe}} V</p>
+            {%else%}
+            <p>Output Voltage  = {{base}} X 10 <sup>{{power}}</sup> V</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+    {% if given_data == "form2" and Ia %}
+    <div class="card" id="current-in-first-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to calculate Inductance 1</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Inductance 1 formula:-</strong>
+            <br>  
+            <p class="btn btn-outline-secondary active"> L₁= L₂* V₁/V₂ -L₂</p>
+            <br>
+            <strong>where:</strong>
+                    <ul> 
+                        <li>V₂ is the output voltage, </li>
+                        <li>L₂ is the Inductance 2,</li>
+                        <li>L₁ is the Inductance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F1}} {{F_op}} </p>
+            <p>Inductance 2 = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+
+            
+            {% if Ib_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance 2 ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Inductance 2 ={{Ib|safe}} H </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+
+            <strong>Put values into formula</strong>
+            <p>L₁= L₂* V₁/V₂ -L₂</p>
+            <p>L₁ = {{Ib|safe}} * {{d|safe}} / {{F|safe}} - {{Ib|safe}}</p>
+            <p> Inductance 1 = {{Ia|safe}} H</p>
+            
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form3" and Ib %}
+    <div class="card" id="current-in-second-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to find Inductance 2 :</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Inductance 2  formula:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active"> L₂= L₁*V₂/(V₁ -V₂)  </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>      
+                       <li>V₂ is the output voltage, </li>
+                        <li>L₂ is the Inductance 2,</li>
+                        <li>L₁ is the Inductance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F1}} {{F_op}} </p>
+            <p>Inductance 1 = {{Ia1}} {{Ia_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+
+             
+                        {% if Ia_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance 1 in ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Inductance 1 ={{Ia|safe}} H </p>
+            </details>
+            {% endif %}
+
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p> L₂= L₁*V₂/(V₁ -V₂) </p>
+            <p>L₂ = {{Ia|safe}} * {{F|safe}} /( {{d|safe}} - {{F|safe}})</p>
+            <p> Inductance 2 = {{Ib|safe}} H</p>
+
+        </div>
+
+    </div>
+    {% endif %}
+
+    {% if given_data == "form4" and d %}
+    <div class="card" id="distance">
+        <div class="card-header">
+            <h2 class="h2">Steps to find the Input Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Input Voltage formula:-</strong>
+            <br> 
+            <p class="btn btn-outline-secondary active"> V₁ = (L₁ + L₂) * V₂ / L₂    </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                       <li>V₂ is the output voltage, </li>
+                        <li>L₂ is the Inductance 2,</li>
+                        <li>L₁ is the Inductance 1,</li>
+                        <li>V₁ is the input voltage</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p> Output Voltage = {{F1}}  {{F_op}} </p>
+            <p>Inductance 1 = {{Ia1}} {{Ia_op}}</p>
+            <p>Inductance 2 = {{Ib1}} {{Ib_op}}</p>
+
+                        {% if Ia_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance 1  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance 1 in ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Inductance 1 ={{Ia|safe}} H </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance 2 ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Inductance 2 ={{Ib|safe}} H </p>
+            </details>
+            {% endif %}
+
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+
+            <strong>Put values into formula</strong>
+            <p>V₁ = (L₁ + L₂) * V₂ / L₂ </p>
+            <p>Input Voltage ={{F|safe}} X ( {{Ia|safe}} + {{Ib|safe}} ) / {{Ib|safe}} </p>
+            <p> Input Voltage = {{d|safe}} V</p>
+            
+        </div>
+
+    </div>
+    {% endif %}
+
+</div>
+
+{%endif%}
+
+
+
+{% if given_option == 'RC' %}
+<div id="clear">
+
+    {% if given_data == "form1" and F %}
+    <div class="card" id="magnetic-force">
+        <div class="card-header">
+            <h2 class="h2">Steps to Output Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Formula for the Output Voltage is -</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">V₂ = V₁/(2*π*f*R₁*C) </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V₂ is the output voltage, </li>
+                        <li>C is the Capacitance</li>
+                        <li>R₁ is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>                     
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Capacitance = {{Ia1}} {{Ia_op}} </p>
+            <p>resistance = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}}</p>
+            <p>frequency = {{p|safe}} {{p_op}}</p>
+           
+            {% if Ia_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance in ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Capacitance ={{Ia|safe}} F </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>resistance in ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>resistance ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if p_op != 'Hz' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
+                    <b><i>"Hz"</i></b></b>
+                </summary>
+                <p>frequency in ={{p1}} {{p_c|safe}}</p>
+                <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+            
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = V₁/(2*π*f*R₁*C)</p>
+            <p> Output Voltage = {{F|safe}} V</p>
+            
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+    {% if given_data == "form2" and Ia %}
+    <div class="card" id="current-in-first-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to calculate Capacitance</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Capacitance formula:-</strong>
+            <br>  
+            <p class="btn btn-outline-secondary active"> V₂ = V₁/(2*π*f*R₁*C)</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>   <li>V₂ is the output voltage, </li>
+                        <li>C is the Capacitance</li>
+                        <li>R₁ is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F1}} {{F_op}} </p>
+            <p>resistance = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+            <p>frequency = {{p1}} {{p_op}} </p>
+
+            
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>resistance in ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>resistance ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if p_op != 'Hz' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
+                    <b><i>"Hz"</i></b></b>
+                </summary>
+                <p>frequency in ={{p1}} {{p_c|safe}}</p>
+                <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+            
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+             
+            <strong>Put values into formula</strong>
+            <p>V₂ = V₁/(2*π*f*R₁*C)</p>
+            
+            <p> Capacitance = {{Ia|safe}} F</p>
+            
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form3" and Ib %}
+    <div class="card" id="current-in-second-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to find resistance :</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>resistance  formula:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active"> V₂ = V₁/(2*π*f*R₁*C)  </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>        <li>V₂ is the output voltage, </li>
+                        <li>C is the Capacitance</li>
+                        <li>R₁ is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F1}} {{F_op}} </p>
+            <p>Capacitance = {{Ia1}} {{Ia_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+            <p>frequency = {{p1}} {{p_op}} </p>
+
+               
+            {% if Ia_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance in ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Capacitance ={{Ia|safe}} F </p>
+            </details>
+            {% endif %}
+
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if p_op != 'Hz' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
+                    <b><i>"Hz"</i></b></b>
+                </summary>
+                <p>frequency in ={{p1}} {{p_c|safe}}</p>
+                <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+            
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = V₁/(2*π*f*R₁*C) </p>
+            <p> resistance = {{Ib|safe}} Ω</p>
+
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form4" and d %}
+    <div class="card" id="distance">
+        <div class="card-header">
+            <h2 class="h2">Steps to find the Input Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Input Voltage formula:-</strong>
+            <br> 
+            <p class="btn btn-outline-secondary active">V₂ = V₁/(2*π*f*R₁*C) </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V₂ is the output voltage, </li>
+                        <li>C is the Capacitance</li>
+                        <li>R₁ is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p> Output Voltage = {{F1}}  {{F_op}} </p>
+            <p>Capacitance = {{Ia1}} {{Ia_op}}</p>
+            <p>resistance = {{Ib1}} {{Ib_op}}</p>
+            <p>frequency = {{p1}} {{p_op}}</p>
+          
+          
+            {% if Ia_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance in ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Capacitance ={{Ia|safe}} F </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>resistance in ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>resistance ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+            
+            {% if p_op != 'Hz' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
+                    <b><i>"Hz"</i></b></b>
+                </summary>
+                <p>frequency in ={{p1}} {{p_c|safe}}</p>
+                <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+            
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = V₁/(2*π*f*R₁*C) </p>           
+            <p> Input Voltage = {{d|safe}} V</p>
+            
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form5" and p %}
+    <div class="card" id="distance">
+        <div class="card-header">
+            <h2 class="h2">Steps to find the frequency </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Input Voltage formula:-</strong>
+            <br> 
+            <p class="btn btn-outline-secondary active">V₂ = V₁/(2*π*f*R₁*C) </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V₂ is the output voltage, </li>
+                        <li>C is the Capacitance</li>
+                        <li>R₁ is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p> Output Voltage = {{F1}}  {{F_op}} </p>
+            <p>Capacitance = {{Ia1}} {{Ia_op}}</p>
+            <p>resistance = {{Ib1}} {{Ib_op}}</p>
+            <p>Input Voltage = {{d1}} {{d_op}}</p>
+          
+           
+            {% if Ia_op != 'F' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Capacitance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"F"</i></b></b>
+                </summary>
+                <p>Capacitance in ={{Ia1}} {{Ia_c|safe}}</p>
+                <p>Capacitance ={{Ia|safe}} F </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>resistance in ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>resistance ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_c|safe}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = V₁/(2*π*f*R₁*C) </p>            
+            <p> frequency = {{p|safe}} Hz</p>
+        </div>
+
+    </div>
+    {% endif %}
+
+    
+</div>
+
+{%endif%}
+
+
+{% if given_option == 'RL' %}
+<div id="clear">
+
+    {% if given_data == "form1" and F %}
+    <div class="card" id="magnetic-force">
+        <div class="card-header">
+            <h2 class="h2">Steps to Output Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Formula for the Output Voltage is -</strong>
+            <br>
+            <p class="btn btn-outline-secondary active"> V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>V₂ is the output voltage, </li>
+                        <li>L is the Inductance</li>
+                        <li>R is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>                     
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Inductance = {{Ia1}} {{Ia_op}} </p>
+            <p>resistance = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}}</p>
+            <p>frequency = {{p|safe}} {{p_op}}</p>
+           
+            {% if Ia_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance in ={{Ia1}} {{Ia_op}}</p>
+                <p>Inductance ={{Ia|safe}} H </p>
+            </details>
+            {% endif %}
+
+            
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>resistance in ={{Ib1}} {{Ib_op}}</p>
+                <p>resistance ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_op}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if p_op != 'Hz' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
+                    <b><i>"Hz"</i></b></b>
+                </summary>
+                <p>frequency in ={{p1}} {{p_op}}</p>
+                <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²)</p>
+             {% if F != -1 %}
+            <p> Output Voltage = {{F|safe}} V</p>
+            {%else%}
+            <p>Output Voltage  = {{base}} X 10 <sup>{{power}}</sup> V</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+    {% if given_data == "form2" and Ia %}
+    <div class="card" id="current-in-first-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to calculate Inductance</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Inductance formula:-</strong>
+            <br>  
+            <p class="btn btn-outline-secondary active"> V₂ = R * V₁ / √(R² + (2*π*f*L)²)</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>   
+                     <li>V₂ is the output voltage, </li>
+                        <li>L is the Inductance</li>
+                        <li>R is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F|safe}} {{F_op}} </p>
+            <p>resistance = {{Ib1}} {{Ib_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+            <p>frequency = {{p1}} {{p_op}} </p>
+
+             
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>Electric  Field in ={{Ib1}} {{Ib_op}}</p>
+                <p>resistance ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_op}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_op}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            
+            {% if p_op != 'Hz' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
+                    <b><i>"Hz"</i></b></b>
+                </summary>
+                <p>frequency in ={{p1}} {{p_op}}</p>
+                <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²)</p>
+            {% if Ia != -1 %}
+            <p> Inductance = {{Ia|safe}} H</p>
+            {%else%}
+            <p>Inductance = {{base}} X 10 <sup>{{power}}</sup> H</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form3" and Ib %}
+    <div class="card" id="current-in-second-wire">
+        <div class="card-header">
+            <h2 class="h2">Steps to find resistance :</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>resistance  formula:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active"> V₂ = R * V₁ / √(R² + (2*π*f*L)²)  </p>
+            <br>
+            <strong>where:</strong>
+                    <ul>        <li>V₂ is the output voltage, </li>
+                        <li>L is the Inductance</li>
+                        <li>R is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>                   
+                 </ul>
+
+            <strong>Input values are:-</strong>
+            <p>Output Voltage = {{F|safe}} {{F_op}} </p>
+            <p>Inductance = {{Ia1}} {{Ia_op}} </p>
+            <p>Input Voltage = {{d1}} {{d_op}} </p>
+            <p>frequency = {{p1}} {{p_op}} </p>
+
+                       
+            {% if Ia_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance in ={{Ia1}} {{Ia_op}}</p>
+                <p>Inductance ={{Ia|safe}} H </p>
+            </details>
+            {% endif %}
+
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_op}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_op}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            
+            {% if p_op != 'Hz' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
+                    <b><i>"Hz"</i></b></b>
+                </summary>
+                <p>frequency in ={{p1}} {{p_op}}</p>
+                <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>
+            {% if Ib != -1 %}
+            <p>Resistance = {{Ib|safe}} Ω</p>
+            {%else%}
+            <p>Resistance  = {{base}} X 10 <sup>{{power}}</sup> Ω</p>
+            {%endif%}
+
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form4" and d %}
+    <div class="card" id="distance">
+        <div class="card-header">
+            <h2 class="h2">Steps to find the Input Voltage </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Input Voltage formula:-</strong>
+            <br> 
+            <p class="btn btn-outline-secondary active">V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>
+            <br>
+            <strong>where:</strong>
+                    <ul> <li>V₂ is the output voltage, </li>
+                        <li>L is the Inductance</li>
+                        <li>R is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p> Output Voltage = {{F1}}  {{F_op}} </p>
+            <p>Inductance = {{Ia1}} {{Ia_op}}</p>
+            <p>resistance = {{Ib1}} {{Ib_op}}</p>
+            <p>frequency = {{p1}} {{p_op}}</p>
+          
+            {% if Ia_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance in ={{Ia1}} {{Ia_op}}</p>
+                <p>Inductance ={{Ia|safe}} H </p>
+            </details>
+            {% endif %}
+
+
+             
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>Electric  Field in ={{Ib1}} {{Ib_op}}</p>
+                <p>resistance ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_op}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            
+            {% if p_op != 'Hz' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
+                    <b><i>"Hz"</i></b></b>
+                </summary>
+                <p>frequency in ={{p1}} {{p_op}}</p>
+                <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²)) </p>            
+             {% if d != -1 %}
+            <p> Input Voltage = {{d|safe}} V</p>
+            {%else%}
+            <p>Input Voltage  = {{base}} X 10 <sup>{{power}}</sup> V</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if given_data == "form5" and p %}
+    <div class="card" id="distance">
+        <div class="card-header">
+            <h2 class="h2">Steps to find the frequency </h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Input Voltage formula:-</strong>
+            <br> 
+            <p class="btn btn-outline-secondary active">V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>
+            <br>
+            <strong>where:</strong>
+                    <ul> <li>V₂ is the output voltage, </li>
+                        <li>L is the Inductance</li>
+                        <li>R is the Resistance,</li>
+                        <li>V₁ is the input voltage</li>
+                        <li>f is the frequency</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p> Output Voltage = {{F1}}  {{F_op}} </p>
+            <p>Inductance = {{Ia1}} {{Ia_op}}</p>
+            <p>resistance = {{Ib1}} {{Ib_op}}</p>
+            <p>Input Voltage = {{d1}} {{d_op}}</p>
+          
+            {% if Ia_op != 'H' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Inductance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
+                    <b><i>"H"</i></b></b>
+                </summary>
+                <p>Inductance in ={{Ia1}} {{Ia_op}}</p>
+                <p>Inductance ={{Ia|safe}} H </p>
+            </details>
+            {% endif %}
+
+
+             
+            {% if Ib_op != 'Ω' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
+                    <b><i>"Ω"</i></b></b>
+                </summary>
+                <p>Electric  Field in ={{Ib1}} {{Ib_op}}</p>
+                <p>resistance ={{Ib|safe}} Ω </p>
+            </details>
+            {% endif %}
+
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_op}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
+            </details>
+            {% endif %}
+
+            
+            
+
+            {% if d_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Input Voltage in ={{d1}} {{d_op}}</p>
+                <p>Input Voltage ={{d|safe}} V </p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>            
+          {% if p != -1 %}
+            <p> frequency = {{p|safe}} Hz</p>
+            {%else%}
+            <p>frequency  = {{base}} X 10 <sup>{{power}}</sup> Hz</p>
+            {%endif%}
+        </div>
+
+    </div>
+    {% endif %}
+
+    
+
+
+
+</div>
+
+{%endif%}
+
+
+
+
+
+
+<script>
+    
+{% if id == 1 %}
+ 
+var scrollDiv = document.getElementById("clear").offsetTop;
+window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+
+{%endif%}
+
+    
+{% if id == 2 %}
+ 
+var scrollDiv = document.getElementById("my_form1").offsetTop;
+window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+
+{%endif%}
+
+
+    var validNumber = new RegExp(/^\d*\.?-?\d*$/);
+    var fist_input = document.getElementById("inlineFormInputGroup").value;
+    function validateNumber(elem) {
+        console.log(elem)
+        if (validNumber.test(elem.value)) {
+            fist_input = elem.value;
+        } else {
+            elem.value = fist_input;
+        }
+    }
+</script>
+
+<script>
+{% comment %} 
+document.getElementById("inlineFormInputGroup1").onchange=()=>{
+    
+    document.getElementById("clear").innerHTML="";
+    
+} {% endcomment %}
+    function myFunction() {
+
+        {% if given_data == "form1" %}
+
+            document.getElementsByName("Ia")[0].value = "";
+            document.getElementsByName("Ib")[0].value = "";
+            document.getElementsByName("d")[0].value = "";
+           
+            document.getElementsByName("d_op")[0].value = "V";
+            
+            {% if given_option == 'RR' %}
+            document.getElementsByName("Ia_op")[0].value = "Ω";
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            {%endif%}
+
+            
+            {% if given_option == 'LL' %}
+            document.getElementsByName("Ia_op")[0].value = "H";
+            document.getElementsByName("Ib_op")[0].value = "H";
+            {%endif%}
+
+            
+            {% if given_option == 'CC' %}
+            document.getElementsByName("Ia_op")[0].value = "F";
+            document.getElementsByName("Ib_op")[0].value = "F";
+            {%endif%}
+
+            {% if given_option == 'RL' %}
+            document.getElementsByName("p")[0].value ="";  
+            document.getElementsByName("Ia_op")[0].value = "H";
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            document.getElementsByName("p_op")[0].value = "Hz";
+            {%endif%}
+
+            
+            {% if given_option == 'RC' %}
+            document.getElementsByName("p")[0].value ="";
+            document.getElementsByName("Ia_op")[0].value = "F";
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            document.getElementsByName("p_op")[0].value = "Hz";
+            {%endif%}
+
+
+
+            document.getElementById("clear").innerHTML = "";
+
+        {% endif %}
+
+
+
+
+        {% if given_data == "form2" %}
+
+            document.getElementsByName("F")[0].value = "";
+            document.getElementsByName("Ib")[0].value = "";
+            document.getElementsByName("d")[0].value = "";
+
+            document.getElementsByName("d_op")[0].value = "V";
+            document.getElementsByName("F_op")[0].value = "V";
+            
+        
+            {% if given_option == 'RR' %}
+            
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            {%endif%}
+
+            
+            {% if given_option == 'LL' %}
+            
+            document.getElementsByName("Ib_op")[0].value = "H";
+            {%endif%}
+
+            
+            {% if given_option == 'CC' %}
+            document.getElementsByName("Ib_op")[0].value = "F";
+            {%endif%}
+            
+            {% if given_option == 'RL' %}
+            document.getElementsByName("p")[0].value ="";
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            document.getElementsByName("p_op")[0].value = "Hz";
+            {%endif%}
+
+            
+            {% if given_option == 'RC' %}
+            document.getElementsByName("p")[0].value ="";
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            document.getElementsByName("p_op")[0].value = "Hz";
+            {%endif%}
+
+           document.getElementById("clear").innerHTML = "";
+        {% endif %}
+
+
+
+
+
+        {% if given_data == "form3" %}
+            document.getElementsByName("Ia")[0].value = "";
+            document.getElementsByName("F")[0].value = "";
+            document.getElementsByName("d")[0].value = "";
+
+            document.getElementsByName("F_op")[0].value = "V";
+            document.getElementsByName("d_op")[0].value = "V";
+ 
+           
+            {% if given_option == 'RR' %}
+            document.getElementsByName("Ia_op")[0].value = "Ω";
+            {%endif%}
+
+            
+            {% if given_option == 'LL' %}
+            document.getElementsByName("Ia_op")[0].value = "H";
+            {%endif%}
+
+            
+            {% if given_option == 'CC' %}
+            document.getElementsByName("Ia_op")[0].value = "F";
+            {%endif%}
+
+            
+            {% if given_option == 'RC' %}
+            document.getElementsByName("p")[0].value ="";
+            document.getElementsByName("Ia_op")[0].value = "F";
+            document.getElementsByName("p_op")[0].value = "Hz";
+            {%endif%}
+
+            
+            {% if given_option == 'RL' %}
+            document.getElementsByName("p")[0].value ="";
+            document.getElementsByName("Ia_op")[0].value = "H";
+            document.getElementsByName("p_op")[0].value = "Hz";
+            {%endif%}
+
+ 
+
+            document.getElementById("clear").innerHTML = "";
+
+        {% endif %}
+
+
+
+
+
+        {% if given_data == "form4" %}
+
+            document.getElementsByName("Ia")[0].value = "";
+            document.getElementsByName("Ib")[0].value = "";
+            document.getElementsByName("F")[0].value = "";
+            document.getElementsByName("F_op")[0].value = "V";
+            
+
+            {% if given_option == 'RR' %}
+            document.getElementsByName("Ia_op")[0].value = "Ω";
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            {%endif%}
+
+            
+            {% if given_option == 'LL' %}
+            document.getElementsByName("Ia_op")[0].value = "H";
+            document.getElementsByName("Ib_op")[0].value = "H";
+            {%endif%}
+
+            
+            {% if given_option == 'CC' %}
+            document.getElementsByName("Ia_op")[0].value = "F";
+            document.getElementsByName("Ib_op")[0].value = "F";
+            {%endif%}
+
+            
+            {% if given_option == 'RL' %}
+            document.getElementsByName("p")[0].value ="";
+            document.getElementsByName("Ia_op")[0].value = "H";
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            document.getElementsByName("p_op")[0].value = "Hz";
+            {%endif%}
+
+            
+            {% if given_option == 'RC' %}
+            document.getElementsByName("p")[0].value ="";
+            document.getElementsByName("Ia_op")[0].value = "F";
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            document.getElementsByName("p_op")[0].value = "Hz";
+            {%endif%}
+
+            document.getElementById("clear").innerHTML = "";
+
+        {% endif %}
+
+        
+
+        {% if given_data == "form5" %}
+
+            document.getElementsByName("F")[0].value = "";
+            document.getElementsByName("Ib")[0].value = "";
+            document.getElementsByName("d")[0].value = "";
+            document.getElementsByName("Ia")[0].value = "";
+
+            document.getElementsByName("d_op")[0].value = "V";
+            document.getElementsByName("F_op")[0].value = "V";
+            
+            
+            {% if given_option == 'RL' %}
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            document.getElementsByName("Ia_op")[0].value = "H";
+            {%endif%}
+
+            
+            {% if given_option == 'RC' %}
+            document.getElementsByName("Ib_op")[0].value = "Ω";
+            document.getElementsByName("Ia_op")[0].value = "F";
+            {%endif%}
+
+           document.getElementById("clear").innerHTML = "";
+
+
+        {% endif %}
+
+
+
+
+    }
+</script>
+<br>
+
+
+{% endblock %}

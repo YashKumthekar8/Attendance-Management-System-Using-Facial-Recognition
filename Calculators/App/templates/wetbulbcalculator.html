@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>Wet Bulb Calculator | Free Calculator to find Wet bulb temperature</title>
+<meta name="description"
+    content="Thin lens equation Calculator makes it easy for you to determine the theoretical yield value in fraction of seconds with steps." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content="Wet Bulb Calculator | Free Calculator to find Wet bulb temperature" />
+<meta property="og:description" content="Wet Bulb Calculator" />
+<meta content="" property="og:site_name" />
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="Wet Bulb Calculator | Free Calculator to find Wet bulb temperature" />
+<meta name="twitter:description"
+    content="Fan CFM Calculator makes it easy for you to determine the theoretical yield value in fraction of seconds with steps." />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<meta property='og:title' content="Wet Bulb Calculator | Free Calculator to find Wet bulb temperature" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Theoratical-Yield-Calculator.jpeg" />
+<meta property='og:description' content="Wet Bulb Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock%}
+
+{%block content%}
+
+<style>
+    input {
+        text-align: right;
+    }
+</style>
+
+{%if go_to %}
+<a href="{{go_to}}" id="ddd"></a>
+{%endif%}
+
+<script>
+	  document.addEventListener('DOMContentLoaded', function () {
+		document.getElementById('ddd').click();
+		});
+</script>
+
+
+<div class="container" style="height: auto !important;">
+    <div class="card c1">
+        <div class="card-header">
+            <h1 class="h1">Wet Bulb Calculator</h1>
+        </div>
+        <div class="card-body">
+            <ul class="messages">
+                  <p {% if message1 %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message1 }}</p>
+                      <p {% if message2 %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                    style="color:red">{{ message2 }}</p>
+            </ul>
+
+            <form action="" method="POST" id="my_form">
+                {% csrf_token %}
+                <div class="col-auto">
+
+                    {% if given_data == "form1" %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Temperature(T):</strong></div>
+                        </div>
+                        <input type="number" oninput="validateNumber(this);" id="inlineFormInputGroup" required=""
+                           placeholder="Enter number"  step="0.001" class="form-control" name="T" {% if T1 != 'None'  %} value="{{T1}}" {% else %} value="5" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="T_op">
+
+                            {% if T_op == '°C' %}
+                            <option value="°C" selected="selected">celsius(°C)</option>
+                            {% else %}
+                            <option value="°C">celsius(°C)</option>
+                            {% endif %}
+
+                            {% if T_op == 'K' %}
+                            <option value="K" selected="selected">kelvin(K)</option>
+                            {% else %}
+                            <option value="K">kelvin(K)</option>
+                            {% endif %}
+
+
+                            {% if T_op == '°F' %}
+                            <option value="°F" selected="selected">fahrenheit(°F)</option>
+                            {% else %}
+                            <option value="°F">fahrenheit(°F)</option>
+                            {% endif %}
+
+                        </select>
+
+
+                    </div>
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Relative humidity(rh):</strong></div>
+                        </div>
+                        <input type="number" step="0.0001"  oninput="validateNumber(this);" id="inlineFormInputGroup" required="" 
+                           placeholder="Enter number" maxlength="10" class="form-control" name="rh" {% if rh1 != 'None' %} value="{{rh1}}" {% else %} value="5" {% endif %}>
+
+                        <select class="select form-control" id="inlineFormInputGroup" name="rh_op">
+
+                            {% if rh_op == '%' %}
+                            <option value="%" selected="selected">percent(%)</option>
+                            {% else %}
+                            <option value="%">percent(%)</option>
+                            {% endif %}
+
+                            {% if rh_op == '‰' %}
+                            <option value="‰" selected="selected">permille(‰)</option>
+                            {% else %}
+                            <option value="‰">permille(‰)</option>
+                            {% endif %}
+
+                            {% if rh_op == '‱' %}
+                            <option value="‱" selected="selected">basis point(‱)</option>
+                            {% else %}
+                            <option value="‱">basis point(‱)</option>
+                            {% endif %}
+
+                        </select>
+
+
+                    </div>
+
+                    {% endif %}
+
+                    <div class=" center col mt-2 ">
+                        <center><button type="submit" class="btn btn-primary">Calculate</button>
+                            <button type="button" onclick="myFunction()" style="margin-top:5px;"
+                                class="btn btn-danger">Reset</button>
+                        </center>
+                    </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div id="clear">
+    {% if given_data == "form1" and Tw %}
+    <div class="card" id="wet-bulb-temperature">
+        <div class="card-header">
+            <h2 class="h2">Steps to Find Wet bulb temperature:</h2>
+        </div>
+
+        <div class="card-body">
+
+            <strong>Wet bulb temperature formula:-</strong>
+            <br>
+            <p class="btn btn-outline-secondary active">Tw = T * arctan[0.151977 * (rh% + 8.313659)^(1/2)] + arctan(T + rh%) - arctan(rh% - 1.676331) + 0.00391838 *(rh%)^(3/2) * arctan(0.023101 * rh%) - 4.686035</p>
+            <br>
+            <strong>where:</strong>
+                    <ul>
+                        <li>T is Temperature - air temperature or dry-bulb temperature is the temperature given by a thermometer not exposed to direct sunlight.,</li>
+                        <li>rh% is Relative humidity - a ratio of how much water vapor is in the air to how much it could contain at a given temperature.</li>
+                    </ul>
+
+            <strong>Input values are:-</strong>
+            <p>T = {{T1}} {{T_op}}</p>
+            <p>rh = {{rh1}} {{rh_op}}</p>
+
+            {% if T_op == "K" %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Temperature {{T1}}<b><i>"{{T_op}}"</i></b> to
+                    <b><i>"°C"</i></b></b>
+                </summary>
+                <p>Temperature={{T1}}+273.15</p>
+                <p>Temperature={{T}} °C</p>
+            </details>
+            {% endif %}
+
+            {% if T_op == "°F" %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Temperature {{T1}}<b><i>"{{T_op}}"</i></b> to
+                    <b><i>"°C"</i></b></b>
+                </summary>
+                <p>Temperature=({{T1}} − 32)/*5/9</p>
+                <p>Temperature={{T}} °C</p>
+            </details>
+            {% endif %}
+
+            {% if rh_op == "‰" %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Temperature {{rh1}}<b><i>"{{rh_op}}"</i></b> to
+                    <b><i>"%"</i></b></b>
+                </summary>
+                <p>Temperature={{rh1}}*0.1</p>
+                <p>Temperature={{rh}}%</p>
+            </details>
+            {% endif %}
+
+            {% if rh_op == "‱" %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Temperature {{rh1}}<b><i>"{{rh_op}}"</i></b> to
+                    <b><i>"%"</i></b></b>
+                </summary>
+                <p>Temperature={{rh1}}*0.01</p>
+                <p>Temperature={{rh}}%</p>
+            </details>
+            {% endif %}
+
+
+            <strong>Put values into formula</strong>
+            
+            <p>Tw = {{T}} * arctan[0.151977 * ({{rh}}% + 8.313659)^(1/2)] + arctan({{T}} + {{rh}}%) - arctan({{rh}}% - 1.676331) + 0.00391838 *({{rh}}%)^(3/2) * arctan(0.023101 *
+                {{rh}}%) - 4.686035</p>
+            
+            {% if Tw == "NaN" %}
+            <p>Wet bulb temperature = {{Tw}} °C</p>
+
+            {% else %}
+
+            
+             {% if Tw != -1 %}
+            <p> Wet bulb temperature = {{Tw}} °C</p>
+            {%else%}
+            <p>Wet bulb temperature = {{base}} X 10 <sup>{{power}}</sup> °C</p>
+            {%endif%}
+            
+            
+            {% endif %}
+
+        </div>
+
+    </div>
+    {% endif %}
+
+</div>
+</div>
+
+
+
+<script>
+    var validNumber = new RegExp(/^\d*\.?-?\d*$/);
+    var fist_input = document.getElementById("inlineFormInputGroup").value;
+    function validateNumber(elem) {
+        console.log(elem)
+        if (validNumber.test(elem.value)) {
+            fist_input = elem.value;
+        } else {
+            elem.value = fist_input;
+        }
+    }
+</script>
+
+<script>
+    
+{% if id == 1 %}
+ 
+var scrollDiv = document.getElementById("clear").offsetTop;
+window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+
+{%endif%}
+
+    function myFunction() {
+          
+        {% if given_data == "form1" %}
+
+            document.getElementsByName("T")[0].value = "";
+            document.getElementsByName("rh")[0].value = "";
+
+            document.getElementsByName("T_op")[0].value = "°C";
+            document.getElementsByName("rh_op")[0].value = "%";
+
+            document.getElementById("clear").innerHTML = "";
+
+        {% endif %}
+
+    }
+</script>
+<br>
+
+
+{% endblock %}
