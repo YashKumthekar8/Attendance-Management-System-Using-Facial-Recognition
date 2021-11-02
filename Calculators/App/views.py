@@ -145,7 +145,7 @@ def convert2(val,u1,num):
         return float(num/1000),"* 10 "+ add_tags("sup",-3) 
     elif u1=='nH':
         return float(num/(10**9)),"* 10 " + add_tags("sup",-9)      
-    elif u1=='μH':
+    elif u1=='µH':
         return float(num/(10**6)),"* 10 " + add_tags("sup",-6)
     else:
       return 100,""       
@@ -4303,11 +4303,11 @@ def voltagedividercalculator(request):
             Ib,Ib_c=convert2("res",Ib_op,Ib)
             d,d_c=convert2("volt",d_op,d)
             p,p_c=convert2("freq",p_op,p)
-            F,F_c=convert2("volt",F_op,F)
+            
           
             #Calculation
-            val=((2*math.pi*Ia*Ib*p)*2+1)**0.5
-            F=d/(math.sqrt(val*val+1))
+            val=( (2*math.pi*Ia*Ib*p)**2 +1 )**0.5
+            F=d/val
             
             if not  (Ia>=1 and Ia<=10000 or (round(Ia,3)!=0 and round(Ia,3)!=0.001 and Ia<=10000)):
               base1,power1=Roundoff(Ia)
@@ -4476,9 +4476,31 @@ def voltagedividercalculator(request):
             d,d_c=convert2("volt",d_op,d)
             p,p_c=convert2("freq",p_op,p)
             F,F_c=convert2("volt",F_op,F)
-          
+
+            if F>=d:
+               context={
+              'F':F,
+              'Ia':Ia,
+              'Ib':Ib,
+              'd':d,
+              'F1':F1,
+              'Ia1':Ia1,
+              'd1':d1,
+              'F_op':F_op,
+              'Ia_op':Ia_op,
+              'd_op':d_op,
+              'given_data':given_data,
+              'given_option':given_option,
+              'p':p,
+              'p1':p1,
+              'p_op':p_op,
+              'message':"Output voltage cannot be greater than or equal to input volatge"
+               }
+               return render(request,'voltagedividercalculator.html',context)
+
+               
             #Calculation
-            Ib=(d*d/F*F-1)**0.5/(2*math.pi*Ia*p)
+            Ib=(d*d/(F*F)-1)**0.5/(2*math.pi*Ia*p)
             
             
             if not  (Ia>=1 and Ia<=10000 or (round(Ia,3)!=0 and round(Ia,3)!=0.001 and Ia<=10000)):
@@ -4564,10 +4586,32 @@ def voltagedividercalculator(request):
             d,d_c=convert2("volt",d_op,d)
             p,p_c=convert2("freq",p_op,p)
             F,F_c=convert2("volt",F_op,F)
-           
+            
+            if F>=d:
+               context={
+              'F':F,
+              'Ia':Ia,
+              'Ib':Ib,
+              'd':d,
+              'F1':F1,
+              'Ib1':Ib1,
+              'd1':d1,
+              'F_op':F_op,
+              'Ib_op':Ib_op,
+              'd_op':d_op,
+              'given_data':given_data,
+              'given_option':given_option,
+              'p':p,
+              'p1':p1,
+              'p_op':p_op,
+              'message':"Output voltage cannot be greater than or equal to input volatge"
+               }
+               return render(request,'voltagedividercalculator.html',context)
+
 
             #Calculation
-            Ia=d/((math.pi*2*Ia*p*F)**0.5)
+            val=(abs( (d/F)**2 -1))**0.5
+            Ia=val/(2*math.pi*p*Ib)
           
             if not  (Ia>=1 and Ia<=10000 or (round(Ia,3)!=0 and round(Ia,3)!=0.001 and Ia<=10000)):
               base1,power1=Roundoff(Ia)
@@ -4651,9 +4695,33 @@ def voltagedividercalculator(request):
             Ib,Ib_c=convert2("res",Ib_op,Ib)
             d,d_c=convert2("volt",d_op,d)
             F,F_c=convert2("volt",F_op,F)
+
+            
+            if F>=d:
+               context={
+              'F':F,
+              'Ia':Ia,
+              'Ib':Ib,
+              'd':d,
+              'F1':F1,
+              'Ia1':Ia1,
+              'd1':d1,
+              'F_op':F_op,
+              'Ia_op':Ia_op,
+              'd_op':d_op,
+              'given_data':given_data,
+              'given_option':given_option,
+              'p':p,
+              'Ib1':Ib1,
+              'Ib_op':Ib_op,
+              'message':"Output voltage cannot be greater than or equal to input volatge"
+               }
+               return render(request,'voltagedividercalculator.html',context)
+
           
             #Calculation
-            p=d/(math.pi*2*Ia*Ia*F)
+            val=((d/F)**2-1)**0.5
+            p=val/(math.pi*2*Ia*Ib)
             
             
             if not  (Ia>=1 and Ia<=10000 or (round(Ia,3)!=0 and round(Ia,3)!=0.001 and Ia<=10000)):
@@ -4756,53 +4824,54 @@ def voltagedividercalculator(request):
             d_op=request.POST.get('d_op')
             p_op=request.POST.get('p_op')
 
+
             #Conversion of units
-            Ia=float(convert2("ind",Ia_op,Ia))
-            Ib=float(convert2("res",Ib_op,Ib))
-            d=float(convert2("volt",d_op,d))
-            p=float(convert2("freq",p_op,p))
+            Ia,Ia_c=convert2("ind",Ia_op,Ia)
+            Ib,Ib_c=convert2("res",Ib_op,Ib)
+            d,d_c=convert2("volt",d_op,d)
+            p,p_c=convert2("freq",p_op,p)
+          
           
             #Calculation
             val=2*math.pi*Ia*p
-            F=d*Ib/math.sqrt(Ib*Ib+val*val)
-            base=0
-            power=0
-            res=F>=1 and F<=10000
-            if not res :
-              base,power=Roundoff(F)
-              F=-1
-            else:
-                 F=round(F,3)
+            F=val*d/(Ib*Ib+val*val)**0.5
             
             
-            if not  (p>=1 and p<=10000):
-              base1,power1=Roundoff(p)
-              p=f"{base1} X 10"+add_tags('sup',power1)
-            else:
-              p=round(p,3)
-
-
-            if not  (Ia>=1 and Ia<=10000):
+            if not  (Ia>=1 and Ia<=10000 or (round(Ia,3)!=0 and round(Ia,3)!=0.001 and Ia<=10000)):
               base1,power1=Roundoff(Ia)
               Ia=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              Ia=round(Ia,3)
-             
-            
-            if not  (Ib>=1 and Ib<=10000):
+              Ia=round(Ia,4)
+          
+            if not  (Ib>=1 and Ib<=10000 or (round(Ib,3)!=0 and round(Ib,3)!=0.001 and Ib<=10000)):
               base1,power1=Roundoff(Ib)
               Ib=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              Ib=round(Ib,3)
+              Ib=round(Ib,4)
 
 
-            if not  (d>=1 and d<=10000):
+           
+            if not  (d>=1 and d<=10000 or (round(d,3)!=0 and round(d,3)!=0.001 and d<=10000)):
               base1,power1=Roundoff(d)
               d=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              d=round(d,3)
+              d=round(d,4)
+        
+           
+            if not  (F>=1 and F<=10000 or (round(F,3)!=0 and round(F,3)!=0.001 and F<=10000)):
+              base1,power1=Roundoff(F)
+              F=f"{base1} X 10"+add_tags('sup',power1)
+            else:
+              F=round(F,4)
 
-          
+            
+            if not  (p>=1 and p<=10000 or (round(p,3)!=0 and round(p,3)!=0.001 and p<=10000)):
+              base1,power1=Roundoff(p)
+              p=f"{base1} X 10"+add_tags('sup',power1)
+            else:
+              p=round(p,4)  
+           
+
 
             #Passing the variables
             context={
@@ -4822,8 +4891,10 @@ def voltagedividercalculator(request):
               'p1':p1,
               'p_op':p_op,
               'id':1,
-               'base':base,
-               'power':power
+              'Ia_c':Ia_c,
+              'Ib_c':Ib_c,
+              'd_c':d_c,
+              'p_c':p_c
 
             }
 
@@ -4845,50 +4916,50 @@ def voltagedividercalculator(request):
             p_op=request.POST.get('p_op')
 
             #Conversion of units
-            Ia=float(convert2("ind",Ia_op,Ia))
-            Ib=float(convert2("res",Ib_op,Ib))
-            F=float(convert2("volt",F_op,F))
-            p=float(convert2("freq",p_op,p))
-
+            Ia,Ia_c=convert2("ind",Ia_op,Ia)
+            Ib,Ib_c=convert2("res",Ib_op,Ib)
+            p,p_c=convert2("freq",p_op,p)
+            F,F_c=convert2("volt",F_op,F)
+          
             #Calculation
-            val=math.sqrt(Ib*Ib +(math.pi*2*Ia*p)*(math.pi*2*Ia*p))
-            d=F*val
-            base=0
-            power=0
-            res=d>=1 and d<=10000
-            if not res :
-              base,power=Roundoff(d)
-              d=-1
-            else:
-                 d=round(d,3)
+            val=2*math.pi*Ia*p
+            #F=val*d/(Ib*Ib+val*val)**0.5
+            d=(Ib*Ib+val*val)**0.5*F/val
             
-            
-            if not  (p>=1 and p<=10000):
-              base1,power1=Roundoff(p)
-              p=f"{base1} X 10"+add_tags('sup',power1)
-            else:
-              p=round(p,3)
-
-            
-            if not  (Ia>=1 and Ia<=10000):
+            if not  (Ia>=1 and Ia<=10000 or (round(Ia,3)!=0 and round(Ia,3)!=0.001 and Ia<=10000)):
               base1,power1=Roundoff(Ia)
               Ia=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              Ia=round(Ia,3)
-             
-            
-            if not  (Ib>=1 and Ib<=10000):
+              Ia=round(Ia,4)
+          
+            if not  (Ib>=1 and Ib<=10000 or (round(Ib,3)!=0 and round(Ib,3)!=0.001 and Ib<=10000)):
               base1,power1=Roundoff(Ib)
               Ib=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              Ib=round(Ib,3)
+              Ib=round(Ib,4)
 
 
-            if not  (F>=1 and F<=10000):
-              base1,power1=Roundoff(F)
-              F=f"{base1} X 10 "+add_tags('sup',power1)
+           
+            if not  (d>=1 and d<=10000 or (round(d,3)!=0 and round(d,3)!=0.001 and d<=10000)):
+              base1,power1=Roundoff(d)
+              d=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              F=round(F,3) 
+              d=round(d,4)
+        
+           
+            if not  (F>=1 and F<=10000 or (round(F,3)!=0 and round(F,3)!=0.001 and F<=10000)):
+              base1,power1=Roundoff(F)
+              F=f"{base1} X 10"+add_tags('sup',power1)
+            else:
+              F=round(F,4)
+
+            
+            if not  (p>=1 and p<=10000 or (round(p,3)!=0 and round(p,3)!=0.001 and p<=10000)):
+              base1,power1=Roundoff(p)
+              p=f"{base1} X 10"+add_tags('sup',power1)
+            else:
+              p=round(p,4)  
+           
 
             #Passing the variables
             context={
@@ -4908,8 +4979,10 @@ def voltagedividercalculator(request):
                'p_op':p_op,
                'p1':p1,
                'id':1,
-                'base':base,
-               'power':power
+              'Ia_c':Ia_c,
+              'Ib_c':Ib_c,
+              'F_c':F_c,
+              'p_c':p_c
 
             }
 
@@ -4931,48 +5004,72 @@ def voltagedividercalculator(request):
             p_op=request.POST.get('p_op')
 
             #Conversion of units
-            Ia=float(convert2("ind",Ia_op,Ia))
-            d=float(convert2("volt",d_op,d))
-            F=float(convert2("volt",F_op,F))
-            p=float(convert2("freq",p_op,p))
+            Ia,Ia_c=convert2("ind",Ia_op,Ia)
+            d,d_c=convert2("volt",d_op,d)
+            p,p_c=convert2("freq",p_op,p)
+            F,F_c=convert2("volt",F_op,F)
           
             #Calculation
-            Ib=math.pi*2*p*Ia/math.sqrt(d*d/(F*F))
-            base=0
-            power=0
-            res=Ib>=1 and Ib<=10000
-            if not res :
-                base,power=Roundoff(Ib)
-                Ib=-1
-            else:
-                Ib=round(Ib,3)
+            val=2*math.pi*Ia*p
+            #F=val*d/(Ib*Ib+val*val)**0.5
+
+            Ib=( (val*d/F)**2-val*val)**0.5
+            if isinstance(Ib, complex):
+             context={
+              'F':F,
+              'Ia':Ia,
+              'Ib':Ib,
+              'd':d,
+              'F1':F1,
+              'Ia1':Ia1,
+              'd1':d1,
+              'F_op':F_op,
+              'Ia_op':Ia_op,
+              'd_op':d_op,
+              'given_data':given_data,
+              'given_option':given_option,
+              'p':p,
+              'p_op':p_op,
+              'p1':p1,
+              'message':"Enter valid data"
+            }
+             return render(request,'voltagedividercalculator.html',context)
+
             
-            if not  (Ia>=1 and Ia<=10000):
+            if not  (Ia>=1 and Ia<=10000 or (round(Ia,3)!=0 and round(Ia,3)!=0.001 and Ia<=10000)):
               base1,power1=Roundoff(Ia)
               Ia=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              Ia=round(Ia,3)
-            
-            
-            if not  (p>=1 and p<=10000):
-              base1,power1=Roundoff(p)
-              p=f"{base1} X 10"+add_tags('sup',power1)
+              Ia=round(Ia,4)
+          
+            if not  (Ib>=1 and Ib<=10000 or (round(Ib,3)!=0 and round(Ib,3)!=0.001 and Ib<=10000)):
+              base1,power1=Roundoff(Ib)
+              Ib=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              p=round(p,3)
+              Ib=round(Ib,4)
 
 
-            if not  (d>=1 and d<=10000):
+           
+            if not  (d>=1 and d<=10000 or (round(d,3)!=0 and round(d,3)!=0.001 and d<=10000)):
               base1,power1=Roundoff(d)
               d=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              d=round(d,3)
+              d=round(d,4)
+        
+           
+            if not  (F>=1 and F<=10000 or (round(F,3)!=0 and round(F,3)!=0.001 and F<=10000)):
+              base1,power1=Roundoff(F)
+              F=f"{base1} X 10"+add_tags('sup',power1)
+            else:
+              F=round(F,4)
 
             
-            if not  (F>=1 and F<=10000):
-              base1,power1=Roundoff(F)
-              F=f"{base1} X 10 "+add_tags('sup',power1)
+            if not  (p>=1 and p<=10000 or (round(p,3)!=0 and round(p,3)!=0.001 and p<=10000)):
+              base1,power1=Roundoff(p)
+              p=f"{base1} X 10"+add_tags('sup',power1)
             else:
-              F=round(F,3) 
+              p=round(p,4)  
+           
 
             #Passing the variables
             context={
@@ -4992,193 +5089,15 @@ def voltagedividercalculator(request):
               'p_op':p_op,
               'p1':p1,
               'id':1,
-               'base':base,
-               'power':power
+              'Ia_c':Ia_c,
+              'F_c':F_c,
+              'd_c':d_c,
+              'p_c':p_c
 
             }
 
             #Rendering the template
             return render(request,'voltagedividercalculator.html',context)
-
-            
-          elif given_data=='form2' and form:
-            #Copying the variables
-            F1=F
-            Ib1=Ib
-            d1=d
-            p1=p
-            
-            #Fetching the units  
-            F_op=request.POST.get('F_op')
-            Ib_op=request.POST.get('Ib_op')
-            d_op=request.POST.get('d_op')
-            p_op=request.POST.get('p_op')
-
-            #Conversion of units
-            
-            Ib=float(convert2("res",Ib_op,Ib))
-            d=float(convert2("volt",d_op,d))
-            F=float(convert2("volt",F_op,F))
-            p=float(convert2("freq",p_op,p))
-            
-
-            #Calculation
-            val=d*d*Ib*Ib/(F*F)-Ib*Ib
-            val=math.sqrt(val)
-
-            Ia=val/(math.pi*2*p)
-            base=0
-            power=0
-            res=Ia>=1 and Ia<=10000
-            if not res :
-              base,power=Roundoff(Ia)
-              Ia=-1
-            else:
-                Ia=round(Ia,3)
-            
-            
-            if not  (p>=1 and p<=10000):
-              base1,power1=Roundoff(p)
-              p=f"{base1} X 10"+add_tags('sup',power1)
-            else:
-              p=round(p,3)
- 
-            
-            if not  (Ib>=1 and Ib<=10000):
-              base1,power1=Roundoff(Ib)
-              Ib=f"{base1} X 10"+add_tags('sup',power1)
-            else:
-              Ib=round(Ib,3)
-
-
-            if not  (d>=1 and d<=10000):
-              base1,power1=Roundoff(d)
-              d=f"{base1} X 10"+add_tags('sup',power1)
-            else:
-              d=round(d,3)
-
-            
-            if not  (F>=1 and F<=10000):
-              base1,power1=Roundoff(F)
-              F=f"{base1} X 10 "+add_tags('sup',power1)
-            else:
-              F=round(F,3) 
-
-
-            #Passing the variables
-            context={
-              'F':F,
-              'Ia':Ia,
-              'Ib':Ib,
-              'd':d,
-              'F1':F1,
-              'Ib1':Ib1,
-              'd1':d1,
-              'F_op':F_op,
-              'Ib_op':Ib_op,
-              'd_op':d_op,
-              'given_data':given_data,
-              'given_option':given_option,
-              'p':p,
-               'p_op':p_op,
-               'p1':p1,
-               'id':1,
-                'base':base,
-               'power':power
-
-            }
-
-            #Rendering the template
-            return render(request,'voltagedividercalculator.html',context)
-
-          
-            
-          elif given_data=='form5' and form:
-            #Copying the variables
-            F1=F
-            Ib1=Ib
-            d1=d
-            Ia1=Ia
-            
-            #Fetching the units  
-            F_op=request.POST.get('F_op')
-            Ib_op=request.POST.get('Ib_op')
-            d_op=request.POST.get('d_op')
-            Ia_op=request.POST.get('Ia_op')
-
-            #Conversion of units
-            Ib=float(convert2("res",Ib_op,Ib))
-            d=float(convert2("volt",d_op,d))
-            F=float(convert2("volt",F_op,F))
-            Ia=float(convert2("ind",Ia_op,Ia))
-            
-
-            #Calculation
-            
-            val=d*d*Ib*Ib/(F*F)-Ib*Ib
-            val=math.sqrt(val)
-            p=val/(math.pi*2*Ia)
-            base=0
-            power=0
-            res=p>=1 and p<=10000
-            if not res :
-                base,power=Roundoff(p)
-                p=-1
-            else:
-                p=round(p,3)
-            
-            if not  (Ia>=1 and Ia<=10000):
-              base1,power1=Roundoff(Ia)
-              Ia=f"{base1} X 10"+add_tags('sup',power1)
-            else:
-              Ia=round(Ia,3)
-             
-            
-            if not  (Ib>=1 and Ib<=10000):
-              base1,power1=Roundoff(Ib)
-              Ib=f"{base1} X 10"+add_tags('sup',power1)
-            else:
-              Ib=round(Ib,3)
-
-
-            if not  (d>=1 and d<=10000):
-              base1,power1=Roundoff(d)
-              d=f"{base1} X 10"+add_tags('sup',power1)
-            else:
-              d=round(d,3)
-
-            
-            if not  (F>=1 and F<=10000):
-              base1,power1=Roundoff(F)
-              F=f"{base1} X 10 "+add_tags('sup',power1)
-            else:
-              F=round(F,3) 
-
-            #Passing the variables
-            context={
-              'F':F,
-              'Ia':Ia,
-              'Ib':Ib,
-              'd':d,
-              'F1':F1,
-              'Ib1':Ib1,
-              'd1':d1,
-              'Ia1':Ia1,
-              'Ia_op':Ia_op,
-              'F_op':F_op,
-              'Ib_op':Ib_op,
-              'd_op':d_op,
-              'given_data':given_data,
-              'given_option':given_option,
-              'p':p,
-              'id':1,
-               'base':base,
-               'power':power               
-            }
-
-            #Rendering the template
-            return render(request,'voltagedividercalculator.html',context)
-                          
 
           else:
             if given_data==None:
@@ -5247,36 +5166,36 @@ def frequencycalcultor(request):
      if given_data=='form1' and form:    
        
        #Conversion
-       wave=convert2('len',wave_op,wave)
-       time=convert2('time',time_op,time)
+       time,time_c=convert2('time',time_op,time)
+       wave,wave_c=convert2('len',wave_op,wave)
        
        #Calculation
        waveVel=wave/time
        freq=1/time
 
-       if not(wave>=1 and wave<=10000):
+       if not( (wave>=1 and wave<=10000) or (round(wave,3)!=0 and round(wave,3)!=0.001 and wave<=10000)):
               base1,power1=Roundoff(wave)
               wave=f"{base1} X 10 "+add_tags('sup',power1)
        else:
-              wave=round(wave,3)
+              wave=round(wave,4)
        
-       if not(time>=1 and time<=10000):
+       if not( (time>=1 and time<=10000) or (round(time,3)!=0 and round(time,3)!=0.001 and time<=10000)):
               base1,power1=Roundoff(time)
               time=f"{base1} X 10 "+add_tags('sup',power1)
        else:
-              time=round(time,3)
+              time=round(time,4)
 
-       if not(waveVel>=1 and waveVel<=10000):
+       if not( (waveVel>=1 and waveVel<=10000) or (round(waveVel,3)!=0 and round(waveVel,3)!=0.001 and waveVel<=10000)):
               base1,power1=Roundoff(waveVel)
               waveVel=f"{base1} X 10 "+add_tags('sup',power1)
        else:
-              waveVel=round(waveVel,3)
+              waveVel=round(waveVel,4)
        
-       if not(freq>=1 and freq<=10000):
+       if not( (freq>=1 and freq<=10000) or (round(freq,3)!=0 and round(freq,3)!=0.001 and freq<=10000)):
               base1,power1=Roundoff(freq)
               freq=f"{base1} X 10 "+add_tags('sup',power1)
        else:
-              freq=round(freq,3)
+              freq=round(freq,4)
 
        context={
           'waveVel':waveVel,
@@ -5288,44 +5207,46 @@ def frequencycalcultor(request):
           'wave_op':wave_op,
           'time_op':time_op,
           'id':1,
-          'given_data':given_data
-       }       
+          'given_data':given_data,
+          'time_c':time_c,
+          'wave_c':wave_c,
+          }       
        return render(request,'frequencycalcultor.html',context)
      
      
      if given_data=='form2' and form:    
        
        #Conversion
-       waveVel=convert2('vel',waveVel_op,waveVel)
-       time=convert2('time',time_op,time)
+       waveVel,waveVel_c=convert2('vel',waveVel_op,waveVel)
+       time,time_c=convert2('time',time_op,time)
        
        #Calculation
        wave=waveVel*time
        freq=1/time
 
-       if not(waveVel>=1 and waveVel<=10000):
-              base1,power1=Roundoff(waveVel)
-              waveVel=f"{base1} X 10 "+add_tags('sup',power1)
-       else:
-              waveVel=round(waveVel,3)
-       
-       if not(time>=1 and time<=10000):
-              base1,power1=Roundoff(time)
-              time=f"{base1} X 10 "+add_tags('sup',power1)
-       else:
-              time=round(time,3)
-
-       if not(wave>=1 and wave<=10000):
+       if not( (wave>=1 and wave<=10000) or (round(wave,3)!=0 and round(wave,3)!=0.001 and wave<=10000)):
               base1,power1=Roundoff(wave)
               wave=f"{base1} X 10 "+add_tags('sup',power1)
        else:
-              wave=round(wave,3)
+              wave=round(wave,4)
        
-       if not(freq>=1 and freq<=10000):
+       if not( (time>=1 and time<=10000) or (round(time,3)!=0 and round(time,3)!=0.001 and time<=10000)):
+              base1,power1=Roundoff(time)
+              time=f"{base1} X 10 "+add_tags('sup',power1)
+       else:
+              time=round(time,4)
+
+       if not( (waveVel>=1 and waveVel<=10000) or (round(waveVel,3)!=0 and round(waveVel,3)!=0.001 and waveVel<=10000)):
+              base1,power1=Roundoff(waveVel)
+              waveVel=f"{base1} X 10 "+add_tags('sup',power1)
+       else:
+              waveVel=round(waveVel,4)
+       
+       if not( (freq>=1 and freq<=10000) or (round(freq,3)!=0 and round(freq,3)!=0.001 and freq<=10000)):
               base1,power1=Roundoff(freq)
               freq=f"{base1} X 10 "+add_tags('sup',power1)
        else:
-              freq=round(freq,3)
+              freq=round(freq,4)
 
        context={
           'wave':wave,
@@ -5337,7 +5258,9 @@ def frequencycalcultor(request):
           'waveVel_op':waveVel_op,
           'time_op':time_op,
           'id':1,
-          'given_data':given_data
+          'given_data':given_data,
+          'time_c':time_c,
+          'waveVel_c':waveVel_c
        }       
        return render(request,'frequencycalcultor.html',context)
 
@@ -5345,36 +5268,38 @@ def frequencycalcultor(request):
      if given_data=='form3' and form:    
        
        #Conversion
-       waveVel=convert2('vel',waveVel_op,waveVel)
-       wave=convert2('len',wave_op,wave)
+       waveVel,waveVel_c=convert2('vel',waveVel_op,waveVel)
+       wave,wave_c=convert2('len',wave_op,wave)
+       
        
        #Calculation
        time=wave/waveVel
        freq=1/time
 
-       if not(waveVel>=1 and waveVel<=10000):
-              base1,power1=Roundoff(waveVel)
-              waveVel=f"{base1} X 10 "+add_tags('sup',power1)
-       else:
-              waveVel=round(waveVel,3)
-       
-       if not(time>=1 and time<=10000):
-              base1,power1=Roundoff(time)
-              time=f"{base1} X 10 "+add_tags('sup',power1)
-       else:
-              time=round(time,3)
-
-       if not(wave>=1 and wave<=10000):
+       if not( (wave>=1 and wave<=10000) or (round(wave,3)!=0 and round(wave,3)!=0.001 and wave<=10000)):
               base1,power1=Roundoff(wave)
               wave=f"{base1} X 10 "+add_tags('sup',power1)
        else:
-              wave=round(wave,3)
+              wave=round(wave,4)
        
-       if not(freq>=1 and freq<=10000):
+       if not( (time>=1 and time<=10000) or (round(time,3)!=0 and round(time,3)!=0.001 and time<=10000)):
+              base1,power1=Roundoff(time)
+              time=f"{base1} X 10 "+add_tags('sup',power1)
+       else:
+              time=round(time,4)
+
+       if not( (waveVel>=1 and waveVel<=10000) or (round(waveVel,3)!=0 and round(waveVel,3)!=0.001 and waveVel<=10000)):
+              base1,power1=Roundoff(waveVel)
+              waveVel=f"{base1} X 10 "+add_tags('sup',power1)
+       else:
+              waveVel=round(waveVel,4)
+       
+       if not( (freq>=1 and freq<=10000) or (round(freq,3)!=0 and round(freq,3)!=0.001 and freq<=10000)):
               base1,power1=Roundoff(freq)
               freq=f"{base1} X 10 "+add_tags('sup',power1)
        else:
-              freq=round(freq,3)
+              freq=round(freq,4)
+
 
        context={
           'wave':wave,
@@ -5386,7 +5311,9 @@ def frequencycalcultor(request):
           'waveVel_op':waveVel_op,
           'wave_op':wave_op,
           'id':1,
-          'given_data':given_data
+          'given_data':given_data,
+          'wave_c':wave_c,
+          'waveVel_c':waveVel_c
        }       
        return render(request,'frequencycalcultor.html',context)
  
@@ -5395,3 +5322,7 @@ def frequencycalcultor(request):
         return render(request,'frequencycalcultor.html',{'given_data':given_data})   
   else:
     return render(request,'frequencycalcultor.html',{'given_data':'form1'})
+
+
+
+

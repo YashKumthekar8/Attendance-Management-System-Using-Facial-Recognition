@@ -315,28 +315,6 @@
                             <option value="m/s">meter/second(m/s)</option>
                             {% endif %}
 
-                            {% if waveVel_op == 'km/hr' %}
-                            <option value="km/hr" selected="selected">kilometer/hour (km/hr)</option>
-                            {% else %}
-                            <option value="km/hr">kilometer/hour (km/hr)</option>
-                            {% endif %}
-
-
-                            {% if waveVel_op == 'ft/s' %}
-                            <option value="ft/s" selected="selected">feet/second (ft/s)</option>
-                            {% else %}
-                            <option value="ft/s">feet/second (ft/s)</option>
-                            {% endif %}
-
-                            
-                            
-                            {% if waveVel_op == 'mph' %}
-                            <option value="mph" selected="selected">miles per hour(mph)</option>
-                            {% else %}
-                            <option value="mph">miles per hour(mph)</option>
-                            {% endif %}
-                            
-
                         </select>
 
                     </div>
@@ -394,7 +372,7 @@
                      <b>Convert the wavelength  {{wave1}}<b><i>"{{wave_op}}"</i></b> to
                     <b><i>"m"</i></b></b>
                 </summary>
-                <p>wavelength in ={{wave1}} {{wave_op}}</p>
+                <p>Converting  wavelength  ={{wave1}} {{wave_c|safe}}</p>
                 <p>wavelength ={{wave|safe}} m </p>
             </details>
             {% endif %}
@@ -405,7 +383,7 @@
                      <b>Convert the Time period  {{time1}}<b><i>"{{time_op}}"</i></b> to
                     <b><i>"seconds"</i></b></b>
                 </summary>
-                <p>Time period  ={{time1}} {{time_op}}</p>
+                <p>Converting  Time period  ={{time1}} {{time_c|safe}}</p>
                 <p>Time period ={{time|safe}} seconds </p>
             </details>
             {% endif %}
@@ -458,7 +436,7 @@
                      <b>Convert the wave velocity  {{waveVel1}}<b><i>"{{waveVel_op}}"</i></b> to
                     <b><i>"m/s"</i></b></b>
                 </summary>
-                <p>wave velocity in ={{waveVel1}} {{waveVel_op}}</p>
+                <p>Converting  wave velocity ={{waveVel1}} {{waveVel_c|safe}}</p>
                 <p>wave velocity ={{waveVel|safe}} m/s </p>
             </details>
             {% endif %}
@@ -469,7 +447,7 @@
                      <b>Convert the Time period  {{time1}}<b><i>"{{time_op}}"</i></b> to
                     <b><i>"seconds"</i></b></b>
                 </summary>
-                <p>Time period  ={{time1}} {{time_op}}</p>
+                <p>Converting  Time period  ={{time1}} {{time_c|safe}}</p>
                 <p>Time period ={{time|safe}} seconds </p>
             </details>
             {% endif %}
@@ -522,7 +500,7 @@
                      <b>Convert the wave velocity  {{waveVel1}}<b><i>"{{waveVel_op}}"</i></b> to
                     <b><i>"m/s"</i></b></b>
                 </summary>
-                <p>wave velocity in ={{waveVel1}} {{waveVel_op}}</p>
+                <p>Converting wave velocity  ={{waveVel1}} {{waveVel_c|safe}}</p>
                 <p>wave velocity ={{waveVel|safe}} m/s </p>
             </details>
             {% endif %}
@@ -533,7 +511,7 @@
                      <b>Convert the wavelength  {{wave1}}<b><i>"{{wave_op}}"</i></b> to
                     <b><i>"m"</i></b></b>
                 </summary>
-                <p>wavelength in ={{wave1}} {{wave_op}}</p>
+                <p>Converting wavelength  ={{wave1}} {{wave_c|safe}}</p>
                 <p>wavelength ={{wave|safe}} m </p>
             </details>
             {% endif %}

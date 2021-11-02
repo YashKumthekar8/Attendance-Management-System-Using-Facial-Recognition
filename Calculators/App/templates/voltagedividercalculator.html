@@ -975,10 +975,10 @@
         </div>
         <div class="card-body">
             <ul class="messages">
-                {% for message in messages %}
-                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                {% if message %}
+                <p  id="message_container" class="alert alert-danger text-center" 
                     style="color:red">{{ message }}</p>
-                {% endfor %}
+                {% endif %}
             </ul>
 
                     
@@ -1263,7 +1263,7 @@
                         <select class="select form-control" id="inlineFormInputGroup" name="p_op">
                                 
                             {% if p_op == 'Hz' %}
-                            <option value="HZ" selected="selected">Hertz(Hz)</option>
+                            <option value="Hz" selected="selected">Hertz(Hz)</option>
                             {% else %}
                             <option value="Hz">Hertz(Hz)</option>
                             {% endif %}
@@ -1321,10 +1321,10 @@
         </div>
         <div class="card-body">
             <ul class="messages">
-                {% for message in messages %}
-                <p {% if message.tags %} id="message_container" class="alert alert-danger text-center" {% endif %}
+                {% if message %}
+                <p  id="message_container" class="alert alert-danger text-center" 
                     style="color:red">{{ message }}</p>
-                {% endfor %}
+                {% endif %}
             </ul>
 
                     
@@ -1388,11 +1388,7 @@
                             <option value="form1"> Find Output Voltage | Given Inductance,resistance,frequency and Input Voltage </option>
                             {% endif %}
 
-                            {% if given_data == 'form2' %}
-                            <option value="form2" selected="selected"> Find Inductance | Given Output Voltage,resistance,frequency  and Input Voltage </option>
-                            {% else %}
-                            <option value="form2">Find Inductance | Given Output Voltage,resistance ,frequency and Input Voltage  </option>
-                            {% endif %}
+                            
 
                             {% if given_data == 'form3' %}
                             <option value="form3" selected="selected"> Find resistance | Given Inductance,Output Voltage,frequency and Input Voltage
@@ -1408,11 +1404,6 @@
                             {% endif %}
 
                             
-                            {% if given_data == 'form5' %}
-                            <option value="form5" selected="selected"> Find frequency | Given Inductance,resistance,Input Voltage and Output Voltage</option>
-                            {% else %}
-                            <option value="form5"> Find frequency | Given Inductance,resistance,Input Voltage and Output Voltage </option>
-                            {% endif %}
 
                         </select>
                     </div>
@@ -1607,7 +1598,7 @@
                         <select class="select form-control" id="inlineFormInputGroup" name="p_op">
                                 
                             {% if p_op == 'Hz' %}
-                            <option value="HZ" selected="selected">Hertz(Hz)</option>
+                            <option value="Hz" selected="selected">Hertz(Hz)</option>
                             {% else %}
                             <option value="Hz">Hertz(Hz)</option>
                             {% endif %}
@@ -1776,7 +1767,7 @@
                      <b>Convert the Resistance 2  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
                     <b><i>"Ω"</i></b></b>
                 </summary>
-                <p>Electric  Field ={{Ib1}} {{Ib_c|safe}}</p>
+                <p>Resistance 2 ={{Ib1}} {{Ib_c|safe}}</p>
                 <p>Resistance 2 ={{Ib|safe}} Ω </p>
             </details>
             {% endif %}
@@ -1971,7 +1962,7 @@
 {%endif%}
 
 
-{% if given_option == 'CC' %}
+{% if given_option == 'CC'  and id == 1 %}
 <div id="clear">
 
     {% if given_data == "form1" and F %}
@@ -2283,7 +2274,7 @@
 
 {%endif%}
 
-{% if given_option == 'LL'  %}
+{% if given_option == 'LL'  and id == 1 %}
 <div id="clear">
 
     {% if given_data == "form1" and F %}
@@ -2587,7 +2578,7 @@
 
 
 
-{% if given_option == 'RC' %}
+{% if given_option == 'RC' and id == 1 %}
 <div id="clear">
 
     {% if given_data == "form1" and F %}
@@ -2600,7 +2591,7 @@
 
             <strong>Formula for the Output Voltage is -</strong>
             <br>
-            <p class="btn btn-outline-secondary active">V₂ = V₁/(2*π*f*R₁*C) </p>
+            <p class="btn btn-outline-secondary active">V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup> </p>
             <br>
             <strong>where:</strong>
                     <ul>
@@ -2666,7 +2657,7 @@
             
 
             <strong>Put values into formula</strong>
-            <p>V₂ = V₁/(2*π*f*R₁*C)</p>
+            <p>V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup></p>
             <p> Output Voltage = {{F|safe}} V</p>
             
         </div>
@@ -2675,7 +2666,7 @@
     {% endif %}
 
 
-
+    
     {% if given_data == "form2" and Ia %}
     <div class="card" id="current-in-first-wire">
         <div class="card-header">
@@ -2686,7 +2677,7 @@
 
             <strong>Capacitance formula:-</strong>
             <br>  
-            <p class="btn btn-outline-secondary active"> V₂ = V₁/(2*π*f*R₁*C)</p>
+            <p class="btn btn-outline-secondary active"> V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup></p>
             <br>
             <strong>where:</strong>
                     <ul>   <li>V₂ is the output voltage, </li>
@@ -2732,7 +2723,7 @@
                      <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
                     <b><i>"Hz"</i></b></b>
                 </summary>
-                <p>frequency in ={{p1}} {{p_c|safe}}</p>
+                <p>Converting the frequency  ={{p1}} {{p_c|safe}}</p>
                 <p>frequency ={{p|safe}} Hz </p>
             </details>
             {% endif %}
@@ -2754,14 +2745,16 @@
 
              
             <strong>Put values into formula</strong>
-            <p>V₂ = V₁/(2*π*f*R₁*C)</p>
-            
+            <p>V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup></p>
+            <p> C = { (V₁/V₂)<sup>2</sup> -1  }<sup>1/2</sup>/(2*π*f*R₁)</p>
             <p> Capacitance = {{Ia|safe}} F</p>
             
         </div>
 
     </div>
     {% endif %}
+
+
 
 
     {% if given_data == "form3" and Ib %}
@@ -2774,7 +2767,7 @@
 
             <strong>resistance  formula:-</strong>
             <br>
-            <p class="btn btn-outline-secondary active"> V₂ = V₁/(2*π*f*R₁*C)  </p>
+            <p class="btn btn-outline-secondary active"> V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup>  </p>
             <br>
             <strong>where:</strong>
                     <ul>        <li>V₂ is the output voltage, </li>
@@ -2841,7 +2834,8 @@
             {% endif %}
 
             <strong>Put values into formula</strong>
-            <p>V₂ = V₁/(2*π*f*R₁*C) </p>
+            <p>V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup> </p>
+            <p> R₁ = { (V₁/V₂)<sup>2</sup> -1  }<sup>1/2</sup>/(2*π*f*C)</p>
             <p> resistance = {{Ib|safe}} Ω</p>
 
         </div>
@@ -2860,7 +2854,7 @@
 
             <strong>Input Voltage formula:-</strong>
             <br> 
-            <p class="btn btn-outline-secondary active">V₂ = V₁/(2*π*f*R₁*C) </p>
+            <p class="btn btn-outline-secondary active">V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup> </p>
             <br>
             <strong>where:</strong>
                     <ul>
@@ -2927,7 +2921,8 @@
             {% endif %}
 
             <strong>Put values into formula</strong>
-            <p>V₂ = V₁/(2*π*f*R₁*C) </p>           
+            <p>V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup> </p> 
+            <p> V₁ = V₂ * { (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup></p>          
             <p> Input Voltage = {{d|safe}} V</p>
             
         </div>
@@ -2946,7 +2941,7 @@
 
             <strong>Input Voltage formula:-</strong>
             <br> 
-            <p class="btn btn-outline-secondary active">V₂ = V₁/(2*π*f*R₁*C) </p>
+            <p class="btn btn-outline-secondary active">V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup> </p>
             <br>
             <strong>where:</strong>
                     <ul>
@@ -3011,7 +3006,8 @@
             {% endif %}
 
             <strong>Put values into formula</strong>
-            <p>V₂ = V₁/(2*π*f*R₁*C) </p>            
+            <p>V₂ = V₁/{ (2*π*f*R₁*C)<sup>2</sup>+1}<sup>1/2</sup> </p>  
+            <p> f = { (V₁/V₂)<sup>2</sup> -1  }<sup>1/2</sup>/(2*π*C*R₁)</p>          
             <p> frequency = {{p|safe}} Hz</p>
         </div>
 
@@ -3019,12 +3015,26 @@
     {% endif %}
 
     
+
+
+
+
+    
 </div>
 
 {%endif%}
 
 
-{% if given_option == 'RL' %}
+
+
+
+
+
+
+
+
+
+{% if given_option == 'RL' and id == 1 %}
 <div id="clear">
 
     {% if given_data == "form1" and F %}
@@ -3036,8 +3046,8 @@
         <div class="card-body">
 
             <strong>Formula for the Output Voltage is -</strong>
-            <br>
-            <p class="btn btn-outline-secondary active"> V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>
+            <br> 
+            <p class="btn btn-outline-secondary active"> V₂ = 2*π*f*L * V₁ / √(R² + (2*π*f*L)²) </p>
             <br>
             <strong>where:</strong>
                     <ul>
@@ -3060,7 +3070,7 @@
                      <b>Convert the Inductance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
                     <b><i>"H"</i></b></b>
                 </summary>
-                <p>Inductance in ={{Ia1}} {{Ia_op}}</p>
+                <p> Converting Inductance  ={{Ia1}} {{Ia_c|safe}}</p>
                 <p>Inductance ={{Ia|safe}} H </p>
             </details>
             {% endif %}
@@ -3072,7 +3082,7 @@
                      <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
                     <b><i>"Ω"</i></b></b>
                 </summary>
-                <p>resistance in ={{Ib1}} {{Ib_op}}</p>
+                <p>Converting resistance in ={{Ib1}} {{Ib_c|safe}}</p>
                 <p>resistance ={{Ib|safe}} Ω </p>
             </details>
             {% endif %}
@@ -3083,7 +3093,7 @@
                      <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
                     <b><i>"V"</i></b></b>
                 </summary>
-                <p>Input Voltage in ={{d1}} {{d_op}}</p>
+                <p> Converting Input Voltage  ={{d1}} {{d_c|safe}}</p>
                 <p>Input Voltage ={{d|safe}} V </p>
             </details>
             {% endif %}
@@ -3095,109 +3105,16 @@
                      <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
                     <b><i>"Hz"</i></b></b>
                 </summary>
-                <p>frequency in ={{p1}} {{p_op}}</p>
+                <p>Converting frequency  ={{p1}} {{p_c|safe}}</p>
                 <p>frequency ={{p|safe}} Hz </p>
             </details>
             {% endif %}
 
 
+
             <strong>Put values into formula</strong>
-            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²)</p>
-             {% if F != -1 %}
+            <p>V₂ = 2*π*f*L * V₁ / √(R² + (2*π*f*L)²)</p>
             <p> Output Voltage = {{F|safe}} V</p>
-            {%else%}
-            <p>Output Voltage  = {{base}} X 10 <sup>{{power}}</sup> V</p>
-            {%endif%}
-        </div>
-
-    </div>
-    {% endif %}
-
-
-
-    {% if given_data == "form2" and Ia %}
-    <div class="card" id="current-in-first-wire">
-        <div class="card-header">
-            <h2 class="h2">Steps to calculate Inductance</h2>
-        </div>
-
-        <div class="card-body">
-
-            <strong>Inductance formula:-</strong>
-            <br>  
-            <p class="btn btn-outline-secondary active"> V₂ = R * V₁ / √(R² + (2*π*f*L)²)</p>
-            <br>
-            <strong>where:</strong>
-                    <ul>   
-                     <li>V₂ is the output voltage, </li>
-                        <li>L is the Inductance</li>
-                        <li>R is the Resistance,</li>
-                        <li>V₁ is the input voltage</li>
-                        <li>f is the frequency</li>
-                    </ul>
-
-            <strong>Input values are:-</strong>
-            <p>Output Voltage = {{F|safe}} {{F_op}} </p>
-            <p>resistance = {{Ib1}} {{Ib_op}} </p>
-            <p>Input Voltage = {{d1}} {{d_op}} </p>
-            <p>frequency = {{p1}} {{p_op}} </p>
-
-             
-            {% if Ib_op != 'Ω' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
-                    <b><i>"Ω"</i></b></b>
-                </summary>
-                <p>Electric  Field in ={{Ib1}} {{Ib_op}}</p>
-                <p>resistance ={{Ib|safe}} Ω </p>
-            </details>
-            {% endif %}
-
-            {% if d_op != 'V' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
-                    <b><i>"V"</i></b></b>
-                </summary>
-                <p>Input Voltage in ={{d1}} {{d_op}}</p>
-                <p>Input Voltage ={{d|safe}} V </p>
-            </details>
-            {% endif %}
-
-            
-            {% if F_op != 'V' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
-                    <b><i>"V"</i></b></b>
-                </summary>
-                <p>Output Voltage in ={{F1}} {{F_op}}</p>
-                <p>Output Voltage ={{F|safe}} V </p>
-            </details>
-            {% endif %}
-
-            
-            
-            {% if p_op != 'Hz' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
-                    <b><i>"Hz"</i></b></b>
-                </summary>
-                <p>frequency in ={{p1}} {{p_op}}</p>
-                <p>frequency ={{p|safe}} Hz </p>
-            </details>
-            {% endif %}
-
-
-            <strong>Put values into formula</strong>
-            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²)</p>
-            {% if Ia != -1 %}
-            <p> Inductance = {{Ia|safe}} H</p>
-            {%else%}
-            <p>Inductance = {{base}} X 10 <sup>{{power}}</sup> H</p>
-            {%endif%}
         </div>
 
     </div>
@@ -3214,7 +3131,7 @@
 
             <strong>resistance  formula:-</strong>
             <br>
-            <p class="btn btn-outline-secondary active"> V₂ = R * V₁ / √(R² + (2*π*f*L)²)  </p>
+            <p class="btn btn-outline-secondary active"> V₂ = 2*π*f*L * V₁ / √(R² + (2*π*f*L)²)  </p>
             <br>
             <strong>where:</strong>
                     <ul>        <li>V₂ is the output voltage, </li>
@@ -3230,14 +3147,13 @@
             <p>Input Voltage = {{d1}} {{d_op}} </p>
             <p>frequency = {{p1}} {{p_op}} </p>
 
-                       
             {% if Ia_op != 'H' %}
             <details style="border:2px solid #009FE8; width:100%;">
                 <summary>
                      <b>Convert the Inductance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
                     <b><i>"H"</i></b></b>
                 </summary>
-                <p>Inductance in ={{Ia1}} {{Ia_op}}</p>
+                <p> Converting Inductance  ={{Ia1}} {{Ia_c|safe}}</p>
                 <p>Inductance ={{Ia|safe}} H </p>
             </details>
             {% endif %}
@@ -3249,24 +3165,11 @@
                      <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
                     <b><i>"V"</i></b></b>
                 </summary>
-                <p>Input Voltage in ={{d1}} {{d_op}}</p>
+                <p> Converting Input Voltage  ={{d1}} {{d_c|safe}}</p>
                 <p>Input Voltage ={{d|safe}} V </p>
             </details>
             {% endif %}
 
-            
-            {% if F_op != 'V' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
-                    <b><i>"V"</i></b></b>
-                </summary>
-                <p>Output Voltage in ={{F1}} {{F_op}}</p>
-                <p>Output Voltage ={{F|safe}} V </p>
-            </details>
-            {% endif %}
-
-            
             
             {% if p_op != 'Hz' %}
             <details style="border:2px solid #009FE8; width:100%;">
@@ -3274,19 +3177,30 @@
                      <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
                     <b><i>"Hz"</i></b></b>
                 </summary>
-                <p>frequency in ={{p1}} {{p_op}}</p>
+                <p>Converting frequency  ={{p1}} {{p_c|safe}}</p>
                 <p>frequency ={{p|safe}} Hz </p>
+            </details>
+            {% endif %}
+
+            
+            
+            {% if F_op != 'V' %}
+            <details style="border:2px solid #009FE8; width:100%;">
+                <summary>
+                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
+                    <b><i>"V"</i></b></b>
+                </summary>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
+                <p>Output Voltage ={{F|safe}} V </p>
             </details>
             {% endif %}
 
 
             <strong>Put values into formula</strong>
-            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>
-            {% if Ib != -1 %}
+            <p>V₂ = 2*π*f*L * V₁ / √(R² + (2*π*f*L)²) </p>
+            <p>R = { (2*π*f*L * V₁/V₂)<sup>2</sup> - (2*π*f*L)² }<sup>1/2</sup> </p>
             <p>Resistance = {{Ib|safe}} Ω</p>
-            {%else%}
-            <p>Resistance  = {{base}} X 10 <sup>{{power}}</sup> Ω</p>
-            {%endif%}
+            
 
         </div>
 
@@ -3304,7 +3218,7 @@
 
             <strong>Input Voltage formula:-</strong>
             <br> 
-            <p class="btn btn-outline-secondary active">V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>
+            <p class="btn btn-outline-secondary active">V₂ = 2*π*f*L * V₁ / √(R² + (2*π*f*L)²) </p>
             <br>
             <strong>where:</strong>
                     <ul> <li>V₂ is the output voltage, </li>
@@ -3319,44 +3233,30 @@
             <p>Inductance = {{Ia1}} {{Ia_op}}</p>
             <p>resistance = {{Ib1}} {{Ib_op}}</p>
             <p>frequency = {{p1}} {{p_op}}</p>
-          
+
             {% if Ia_op != 'H' %}
             <details style="border:2px solid #009FE8; width:100%;">
                 <summary>
                      <b>Convert the Inductance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
                     <b><i>"H"</i></b></b>
                 </summary>
-                <p>Inductance in ={{Ia1}} {{Ia_op}}</p>
+                <p> Converting Inductance  ={{Ia1}} {{Ia_c|safe}}</p>
                 <p>Inductance ={{Ia|safe}} H </p>
             </details>
             {% endif %}
 
-
-             
+            
             {% if Ib_op != 'Ω' %}
             <details style="border:2px solid #009FE8; width:100%;">
                 <summary>
                      <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
                     <b><i>"Ω"</i></b></b>
                 </summary>
-                <p>Electric  Field in ={{Ib1}} {{Ib_op}}</p>
+                <p>Converting resistance in ={{Ib1}} {{Ib_c|safe}}</p>
                 <p>resistance ={{Ib|safe}} Ω </p>
             </details>
             {% endif %}
 
-            
-            {% if F_op != 'V' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
-                    <b><i>"V"</i></b></b>
-                </summary>
-                <p>Output Voltage in ={{F1}} {{F_op}}</p>
-                <p>Output Voltage ={{F|safe}} V </p>
-            </details>
-            {% endif %}
-
-            
             
             {% if p_op != 'Hz' %}
             <details style="border:2px solid #009FE8; width:100%;">
@@ -3364,76 +3264,12 @@
                      <b>Convert the frequency {{p1}}<b><i>"{{p_op}}"</i></b> to
                     <b><i>"Hz"</i></b></b>
                 </summary>
-                <p>frequency in ={{p1}} {{p_op}}</p>
+                <p>Converting frequency  ={{p1}} {{p_c|safe}}</p>
                 <p>frequency ={{p|safe}} Hz </p>
             </details>
             {% endif %}
 
-
-
-            <strong>Put values into formula</strong>
-            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²)) </p>            
-             {% if d != -1 %}
-            <p> Input Voltage = {{d|safe}} V</p>
-            {%else%}
-            <p>Input Voltage  = {{base}} X 10 <sup>{{power}}</sup> V</p>
-            {%endif%}
-        </div>
-
-    </div>
-    {% endif %}
-
-
-    {% if given_data == "form5" and p %}
-    <div class="card" id="distance">
-        <div class="card-header">
-            <h2 class="h2">Steps to find the frequency </h2>
-        </div>
-
-        <div class="card-body">
-
-            <strong>Input Voltage formula:-</strong>
-            <br> 
-            <p class="btn btn-outline-secondary active">V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>
-            <br>
-            <strong>where:</strong>
-                    <ul> <li>V₂ is the output voltage, </li>
-                        <li>L is the Inductance</li>
-                        <li>R is the Resistance,</li>
-                        <li>V₁ is the input voltage</li>
-                        <li>f is the frequency</li>
-                    </ul>
-
-            <strong>Input values are:-</strong>
-            <p> Output Voltage = {{F1}}  {{F_op}} </p>
-            <p>Inductance = {{Ia1}} {{Ia_op}}</p>
-            <p>resistance = {{Ib1}} {{Ib_op}}</p>
-            <p>Input Voltage = {{d1}} {{d_op}}</p>
-          
-            {% if Ia_op != 'H' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the Inductance  {{Ia1}}<b><i>"{{Ia_op}}"</i></b> to
-                    <b><i>"H"</i></b></b>
-                </summary>
-                <p>Inductance in ={{Ia1}} {{Ia_op}}</p>
-                <p>Inductance ={{Ia|safe}} H </p>
-            </details>
-            {% endif %}
-
-
-             
-            {% if Ib_op != 'Ω' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the resistance  {{Ib1}}<b><i>"{{Ib_op}}"</i></b> to
-                    <b><i>"Ω"</i></b></b>
-                </summary>
-                <p>Electric  Field in ={{Ib1}} {{Ib_op}}</p>
-                <p>resistance ={{Ib|safe}} Ω </p>
-            </details>
-            {% endif %}
-
+            
             
             {% if F_op != 'V' %}
             <details style="border:2px solid #009FE8; width:100%;">
@@ -3441,42 +3277,24 @@
                      <b>Convert the Output Voltage  {{F1}}<b><i>"{{F_op}}"</i></b> to
                     <b><i>"V"</i></b></b>
                 </summary>
-                <p>Output Voltage in ={{F1}} {{F_op}}</p>
+                <p>Output Voltage in ={{F1}} {{F_c|safe}}</p>
                 <p>Output Voltage ={{F|safe}} V </p>
             </details>
             {% endif %}
 
-            
-            
-
-            {% if d_op != 'V' %}
-            <details style="border:2px solid #009FE8; width:100%;">
-                <summary>
-                     <b>Convert the Input Voltage  {{d1}}<b><i>"{{d_op}}"</i></b> to
-                    <b><i>"V"</i></b></b>
-                </summary>
-                <p>Input Voltage in ={{d1}} {{d_op}}</p>
-                <p>Input Voltage ={{d|safe}} V </p>
-            </details>
-            {% endif %}
-
-
+          
             <strong>Put values into formula</strong>
-            <p>V₂ = R * V₁ / √(R² + (2*π*f*L)²) </p>            
-          {% if p != -1 %}
-            <p> frequency = {{p|safe}} Hz</p>
-            {%else%}
-            <p>frequency  = {{base}} X 10 <sup>{{power}}</sup> Hz</p>
-            {%endif%}
+            <p>V₂ = 2*π*f*L * V₁ / √(R² + (2*π*f*L)²)) </p>            
+            <p>V₁ = V₂ *  √(R² + (2*π*f*L)²)) /(2*π*f*L)  </p>
+            <p> Input Voltage = {{d|safe}} V</p>
+            
         </div>
 
     </div>
     {% endif %}
 
+
     
-
-
-
 </div>
 
 {%endif%}
