@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Attendance System</title>
+</head>
+<body>
+<center>
+	<form method = "post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Register</button>
+	</form>
+<br>
+		<button type="submit"><a href="markAtt/"> Mark Attendance </a></button>
+	
+</center>
+
+
+</body>
+</html>
