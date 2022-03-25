@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from numpy import append
 from app.models import *
 from .model_form import *
 from .utility import *
@@ -37,10 +38,15 @@ def MarkAttendance(request):
 				   ImgPath=f"{dir}/{f}"
 
 				
-				name=Recognize(ImgPath)
+				photo_name=Recognize(ImgPath)
+				q=Image.objects.all()
+				name=[]
+				for i in q:
+					if str(i.person_Img.path.split('\\')[-1]) in photo_name:
+					   name.append(i.name)
 				
 				if len(name)!=0:
-				  listToStr = ','.join([str(elem) for elem in name])  		
+				   listToStr = ','.join([str(elem) for elem in name])  		
 				else:
 				  listToStr="All absent"
 
