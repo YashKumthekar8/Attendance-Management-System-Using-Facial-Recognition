@@ -7,6 +7,7 @@ urlpatterns = [
     path('success', success, name = 'success'),
     path('markAtt/',MarkAttendance),
     path('present/<str:name>/',present),
+    path('capturePhoto/',CapturePhoto)
 ]
 
 
