@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Attendance System</title>
+</head>
+<body>
+<center>
+	{{message}}
+    <br>
+    <form action="" method="post">
+     {% csrf_token %}
+     {% for fm in form%}
+     {{fm.label_tag}} {{fm}} {{fm.error|striptags}} <br> <br>
+     {% endfor %}
+    <button type="submit">Login</button>
+    </form>
+	<br>
+      <button><a href="signup/">SignUp</a></button>
+</center>
+
+
+</body>
+</html>

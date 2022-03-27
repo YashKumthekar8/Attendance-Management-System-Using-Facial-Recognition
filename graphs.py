@@ -68,33 +68,31 @@ def BarGraph(data,label,color):
 '''
 Example of calling function BarGraph([1,2,3,100,-1],["A","B","C","D","E"],"violet")    
 '''
+def SeparateXY(df):
+    x=[]
+    y=[]
+    for ind in df.index:
+      for name in df.columns:
+          if df[name][ind]==1:
+              x.append(df["date"][ind])
+              y.append(name)
+    return x,y
+
+
 
 #Function for plotting the scatter plot
-def ScatterPlot(dataFrame,xlabel,ylabel,type):
-    fig = px.scatter(dataFrame, x=xlabel, y=ylabel, color=type, symbol=type)
+def ScatterPlot(df):
+    x_axis,y_axis=SeparateXY(df)
+    fig=go.Figure()
+    fig.add_trace(go.Scatter(x=x_axis,y=y_axis,mode="markers",marker_symbol="x"))
+    fig.update_xaxes(type='category')
+    fig.update_yaxes(type='category')    
+    fig.update_traces(marker_size=15)
+
     fig.show()
     return fig.to_html()
 
+data=[['27-03',1,0,0,1],['28-03',1,0,1,1],['29-03',1,1,1,1],['30-03',0,0,1,1]]
+df=pd.DataFrame(data,columns=["date","8-9","9-10","10-11","11-12"])
 
-
-#calling the scatter plot function
-# df = px.data.iris()
-# ScatterPlot(df,"sepal_width","sepal_length","species")
-
-''''
-date       time t1 t2  t3   t4
-  29          8-9  1  0    0    0
-31         9-10  1 0    1    0 
-'''
-
-
-# time_slot=["8-9","9-10","10-11","11-12"]
-# date=["29","31","1","2"]
-# present_table=[]
-# present_table.append([1,0,0,0])
-# present_table.append([1,0,1,0])
-# present_table.append([1,0,0,1])
-# present_table.append([1,1,1,1])
-
-# df=[]
-LineGraph([1,2,3,4],[3,5,6,7],"tp","yellow","Example")
+ScatterPlot(df)

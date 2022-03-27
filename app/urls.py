@@ -3,7 +3,10 @@ from .views import *
 
 
 urlpatterns = [
-    path('',person_image_view),
+    path('',home,name="Login"),
+    path('logout/',logout_view),
+    path('signup/',sign_up), 
+    path('home/<str:name>',person_image_view,name="homePage"),
     path('success', success, name = 'success'),
     path('markAtt/',MarkAttendance),
     path('present/<str:name>/',present),
