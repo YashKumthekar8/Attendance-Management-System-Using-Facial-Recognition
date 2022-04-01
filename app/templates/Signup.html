@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/GateMaster.css">
+    <title>Regsiter</title>
+</head>
+<style>
+    p
+    {
+        clear: both;
+        font-weight: bolder;
+        font-size: inherit;
+        float: initial;
+    }
+    input,select
+    {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #cccc;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        float: right;
+    }
+    input[type="submit"]
+    {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        float: inline-start;
+        cursor: pointer ;
+        width: 20%;
+        float: none;
+    }
+    input[type="reset"]
+    {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        float: inline-end;
+        cursor: pointer;
+        width: 20%;
+        float: none;
+    }
+    aside
+    {
+        clear: left;
+        float: right;
+        width: 40%;
+        padding-right: 10px;
+        padding-bottom: 10px;
+    }
+    fieldset
+    {
+        clear: both;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6)
+    }
+    div
+    {
+        float: left;
+    }
+    .container
+    {
+        float: i;
+        width: 50%;
+        margin: auto;
+        overflow: hidden;
+        background: white;
+        margin-top: 20px;
+    }
+
+    .container ul 
+    {
+        padding: 0px;
+        margin: 0px;
+    }
+    .container ul li
+    {
+        float:left;
+        list-style: none;
+        width:40%;
+        height:300px;
+        background: white;
+        margin :20px 0px 20px 55px; 
+        border:2px solid blueviolet;
+        box-sizing: border-box;
+        border-radius: 20px;
+    }
+    .container ul li .bottom
+    {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        background: #333;   
+        text-align: center;
+        color:white;
+        font-size: 20px;
+        border-radius: 20px;
+    }
+    .container ul li .top
+    {
+        width: 100%;
+        height: 200px;
+        line-height: 30px;
+        font-size: 15px;
+        text-align: center;
+        font-weight: bolder;
+    }
+</style>
+<body>
+    <header>
+        <center>
+        <img src="/static/images/logo.jpg" width="15%" height="15%">
+        </center>
+    </header>
+    <br>
+    <aside>
+        <fieldset>
+            {% if id == 1 %}
+            <h2><u><center>Regsiter</center></u></h2>
+            <h3>{{message}}</h3>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}   
+                {% for fm in form%}
+                {{fm.label_tag}} {{fm}} {{fm.error|striptags}} <br> <br>
+                {% endfor %}
+                <p>
+                    <center>
+                        <button type="submit" style="background-color:green;color:white;padding:4px;border-radius:4px;">Submit</button>
+                    </center>
+                </p>
+            </form>    
+            {%else%}
+            <h2><u><center>Add Image</center></u></h2>
+            <h3>{{message}}</h3>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <input name="name" style="display:none;"  value="{{name}}"> 
+                <p> Upload Image {{form.person_Img}}<p>
+                <p>
+                    <center>
+                        <button type="submit" name="upload" style="background-color:green;color:white;padding:4px;border-radius:4px;">Upload</button>
+                    </center>
+                </p>
+            </form>    
+            
+
+            {%endif%}
+            
+            
+            </fieldset>
+    </form>
+    </aside>
+    <div class="container">
+        <ul>
+            <li>
+                <div class="bottom">
+                    <ul>Multi-Branches Study Material</ul>
+                    <img src="https://img.icons8.com/nolan/120/web.png" class="img-fluid">
+                </div>
+                <div class="top">
+                    <ul> <br><br><br><br>Our websites contains video lectures and notes on different topic for better preparation of the students.</ul>
+                </div>
+            </li>
+            <li>
+                <div class="bottom">
+                    <ul>Solve It Now</ul>
+                    <img src="https://img.icons8.com/nolan/120/multi-edit.png" class="img-fluid">
+                </div>
+                <div class="top">
+                    <ul> <br><br><br><br>  Our website also contains previous year Question Papers both with and without solutions, so that students get a fair idea of the exam.</ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

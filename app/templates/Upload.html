@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/GateMaster.css">
+    <title>Upload</title>
+</head>
+<style>
+    p
+    {
+        clear: both;
+        font-weight: bolder;
+        font-size: inherit;
+        float: initial;
+    }
+    input,select
+    {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #cccc;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        float: right;
+    }
+    input[type="submit"]
+    {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        float: inline-start;
+        cursor: pointer ;
+        width: 20%;
+        float: none;
+    }
+    aside
+    {
+        clear: left;
+        float: right;
+        width: 40%;
+        padding-right: 10px;
+        padding-bottom: 10px;
+    }
+    fieldset
+    {
+        clear: both;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6)
+    }
+    div
+    {
+        float: left;
+    }
+    .container
+    {
+        float: i;
+        width: 50%;
+        margin: auto;
+        overflow: hidden;
+        background: white;
+        margin-top: 20px;
+    }
+
+    .container ul 
+    {
+        padding: 0px;
+        margin: 0px;
+    }
+    .container ul li
+    {
+        float:left;
+        list-style: none;
+        width:40%;
+        height:300px;
+        background: white;
+        margin :20px 0px 20px 55px; 
+        border:2px solid rgb(142, 57, 221);
+        box-sizing: border-box;
+        border-radius: 20px;
+    } 
+    * {
+  box-sizing: border-box;
+}
+</style>
+<body>
+    <header>
+        <center>
+        <img src="/static/images/logo.jpg" width="15%" height="15%">
+        </center>
+    </header>
+    <br>
+    <aside>
+        <!-- Count Graph -->
+        <!-- Time Graph -->
+    </aside>
+    <div class="container">
+        <center><h3>{{message}}</h3></center>
+        <ul>
+            <fieldset>
+                <h2><u><center>Student Details</center></u></h2>
+            {% comment %} <p>IN Time:*
+                <label for="appt-time"></label>
+                <input id="appt-time" type="time" name="appt-time" value="12:00" required>
+            </p>
+            <p>OUT Time:*
+                <label for="appt-time"></label>
+                <input id="appt-time" type="time" name="appt-time" value="12:00" required>
+            </p>
+            <p>Click on the "Choose File" button to upload a file:</p>
+                <form action="/action_page.php">
+                <input type="file" id="myFile" name="filename">
+            <P>
+            <P>            
+                <center>
+                    <input type="submit" value="Upload">
+                </center>
+            </P> {% endcomment %}
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Time:
+                <label for="appt-time"></label>
+                <input id="appt-time" type="time" name="time" value="12:00" required>
+            </p>
+             <p> <b>Upload Image</b> {{form.Img}} </p>
+            <br>
+            <br>
+            <center>
+                <button type="submit" style="background-color:green;color:white;padding:4px;border-radius:4px;">Submit</button>
+            </center>
+        </form>
+            </fieldset>
+        </ul>
+    </div>
+</body>
+</html>

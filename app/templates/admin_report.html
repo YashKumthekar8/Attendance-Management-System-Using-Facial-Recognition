@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/GateMaster.css">
+    <title>Admin Reports</title>
+</head>
+<style>
+    p
+    {
+        clear: both;
+        font-weight: bolder;
+        font-size: inherit;
+        float: initial;
+    }
+    input,select
+    {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #cccc;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        float: right;
+    }
+    input[type="submit"]
+    {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        float: inline-start;
+        cursor: pointer ;
+        width: 20%;
+        float: none;
+    }
+    aside
+    {
+        clear: left;
+        float: right;
+        width: 40%;
+        padding-right: 10px;
+        padding-bottom: 10px;
+    }
+    fieldset
+    {
+        clear: both;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6)
+    }
+    div
+    {
+        float: left;
+    }
+    .container
+    {
+        float: i;
+        width: 50%;
+        margin: auto;
+        overflow: hidden;
+        background: white;
+        margin-top: 20px;
+    }
+
+    .container ul 
+    {
+        padding: 0px;
+        margin: 0px;
+    }
+    .container ul li
+    {
+        float:left;
+        list-style: none;
+        width:40%;
+        height:300px;
+        background: white;
+        margin :20px 0px 20px 55px; 
+        border:2px solid rgb(142, 57, 221);
+        box-sizing: border-box;
+        border-radius: 20px;
+    } 
+    * {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+</style>
+<body>
+    <header>
+        <center>
+        <img src="/static/images/logo.jpg" width="15%" height="15%">
+        </center>
+    </header>
+    <br>
+    
+    <div class="container">
+       
+        <fieldset >
+                <h2><u><center>Week</center></u></h2>
+          <b>{{message1}}</b>      
+        <form action="" method="post">    
+            {% csrf_token %}
+            <p>Week:* <input type="week" id="week" name="week"required> </p>
+            <p>Lecture Start Time:*
+                <label for="appt-time"></label>
+                <input id="appt-time" type="time" name="intime" value="12:00" required>
+            </p>
+            <p>Lecture End Time:*
+                <label for="appt-time"></label>
+                <input id="appt-time" type="time" name="outtime" value="12:00" required>
+            </p>
+            <p>            
+                <center>
+                    <button type="submit" name="graph1" style="background-color:green;color:white;padding:4px;border-radius:4px;">Submit</button>
+                </center>
+            </p>
+        </form>
+              
+        </fieldset>
+        
+        {{graph1|safe}}    
+            
+
+            <br>
+            <br>
+            <br>
+            
+
+            <fieldset>
+                <h2><u><center>Students</center></u></h2>
+                <label for="cars"><b>Student Name *:</b></label>
+             <b>{{message2}}</b>
+                <form action="" method="post">
+                    {%csrf_token%}
+                <select name="student" id="student">
+                  {%for i in name%}
+                    <option value="{{i}}">{{i}}</option>
+                  {% endfor %}
+                </select>
+              
+            <p>Lecture Start Time:*
+                <label for="appt-time"></label>
+                <input id="appt-time" type="time" name="intime1" value="12:00" required>
+            </p>
+            <p>Lecture End Time:*
+                <label for="appt-time"></label>
+                <input id="appt-time" type="time" name="outtime1" value="12:00" required>
+            </p>
+            <p>            
+                <center>
+                    <button type="submit" name="graph2" style="background-color:green;color:white;padding:4px;border-radius:4px;">Submit</button>
+                </center>
+            </p>
+        </form>
+            </fieldset>
+        {{graph2|safe}}    
+
+        </ul>
+    </div>
+</body>
+</html>

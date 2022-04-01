@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/static/GateMaster.css" />
+		<title>Login</title>
+	</head>
+	<style>
+		p {
+			clear: both;
+			font-weight: bolder;
+			font-size: inherit;
+			float: initial;
+		}
+		input[type="submit"] {
+			background-color: #4caf50;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			float: inline-start;
+			cursor: pointer;
+			width: 20%;
+			float: none;
+		}
+		body {
+			background-image: url("images/bg_image1.jpg");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: 100% 100%;
+		}
+		fieldset {
+			clear: both;
+			border-radius: 20px;
+			background: rgb(0, 0, 0); /* Fallback color */
+			background: rgba(
+				3,
+				36,
+				97,
+				0.8
+			); /* Black background with 0.5 opacity */
+			padding: 20px;
+		}
+	</style>
+	<body>
+		<center>
+			<br />
+			<br />
+			<br />
+			<br /><br />
+			<br /><br />
+			<br />
+			<fieldset>
+				<h2>
+					<u><center>Login</center></u>
+					{{message}}
+				</h2>
+				<form action="" method="post">
+					{% csrf_token %} {% for fm in form%} {{fm.label_tag}} {{fm}}
+					{{fm.error|striptags}} <br />
+					<br />
+					{% endfor %}
+					<br>
+					<br>
+					<center>
+					<button type="submit">Submit</button>
+					</center>
+				</form>
+			</fieldset>
+		</center>
+	</body>
+</html>

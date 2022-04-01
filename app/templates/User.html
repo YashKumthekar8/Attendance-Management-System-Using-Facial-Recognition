@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/GateMaster_01.css">
+    <title>User</title>
+</head>
+<body>
+    <header>
+        <center>
+        <img src="/static/images/logo.jpg" width="15%" height="15%">
+        </center>
+    </header>
+    <br>
+    <p>
+        <center>
+            <h1>USER</h1>
+        </center>
+    </p>
+    <center><h3>{{message}}</h3></center>
+    <div class="container">
+        <ul>
+            
+            <li>
+                <div class="bottom" >
+                    <img src="/static/images/exit.png" width="200" height="250" class="img-fluid">
+                </div>
+                <div class="top">
+                    <ul>
+                        <form action="" method="POST">
+                        {% csrf_token %}
+                        <button type="submit"> Mark Attendance </button> 
+                        </form>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="bottom"  >
+                    <img src="/static/images/reports2.jpeg" width="200" height="250" class="img-fluid">
+                </div>
+                <div class="top">
+                    <ul>
+                        <a href="/UserReports/{{name}}"><button>Reports</button></a>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

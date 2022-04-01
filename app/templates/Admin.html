@@ -1,0 +1,87 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/static/GateMaster_01.css"
+		/>
+		<title>Admin</title>
+	</head>
+	<body>
+		<header>
+			<center>
+				<img
+					src="{%static 'images/logo.jpg' %}"
+					width="15%"
+					height="15%"
+				/>
+			</center>
+		</header>
+		<br />
+		<p>
+			<center>
+				<h1>ADMIN</h1>
+			</center>
+		</p>
+		<div class="container">
+			<ul>
+				<li>
+					<div class="bottom">
+						<img
+							src="/static/images/register.png"
+							width="250"
+							height="250"
+							class="img-fluid"
+						/>
+					</div>
+					<div class="top">
+						<ul>
+							<a href="/register/" style="color: white">
+								Register
+							</a>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<div class="bottom">
+						<img
+							src="/static/images/upload.jpg"
+							width="250"
+							height="250"
+							class="img-fluid"
+						/>
+					</div>
+					<div class="top">
+						<ul>
+							<a href="/upload/" style="color: white">
+								Upload
+							</a>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<div class="bottom">
+						<img
+							src="/static/images/reports.png"
+							width="250"
+							height="250"
+							class="img-fluid"
+						/>
+					</div>
+					<div class="top">
+						<ul>
+							<a href="/AdminReports/" style="color: white">
+								Reports
+							</a>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
