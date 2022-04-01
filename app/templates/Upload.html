@@ -56,33 +56,15 @@
     }
     .container
     {
-        float: i;
+        float: unset;
         width: 50%;
         margin: auto;
         overflow: hidden;
         background: white;
         margin-top: 20px;
     }
-
-    .container ul 
-    {
-        padding: 0px;
-        margin: 0px;
-    }
-    .container ul li
-    {
-        float:left;
-        list-style: none;
-        width:40%;
-        height:300px;
-        background: white;
-        margin :20px 0px 20px 55px; 
-        border:2px solid rgb(142, 57, 221);
-        box-sizing: border-box;
-        border-radius: 20px;
-    } 
     * {
-  box-sizing: border-box;
+        box-sizing: border-box;
 }
 </style>
 <body>
@@ -124,7 +106,7 @@
                 <label for="appt-time"></label>
                 <input id="appt-time" type="time" name="time" value="12:00" required>
             </p>
-             <p> <b>Upload Image</b> {{form.Img}} </p>
+            <p> <b>Upload Image</b> {{form.Img}} </p>
             <br>
             <br>
             <center>

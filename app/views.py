@@ -198,9 +198,9 @@ def StudentGraph(dates,intime,outtime,name):
 #Function for the admin reports page
 @login_required
 def AdminReports(request):
+	usernames=[]
 	if request.method=="POST":
 		obj=User.objects.all()
-		usernames=[]
 		for i in obj:
 			if not i.is_superuser: 
 				usernames.append(str(i.username))
