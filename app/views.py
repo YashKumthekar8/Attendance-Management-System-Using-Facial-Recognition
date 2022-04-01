@@ -37,7 +37,8 @@ def Signup(request):
 		if "upload" in request.POST:
 			form=ImageForm(request.POST,request.FILES)		
 			form.save()
-			return redirect('Home')
+			form=UserCreationForm()
+			return render(request,'Signup.html',context={'form':form,"message":"User Saved Successfully",'id':1})
 
 		else:
 			if request.method=="POST":
